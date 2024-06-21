@@ -41,13 +41,13 @@ jobs:
       - name: Build
         run: npm run build
       - name: Generate 404 file
-        run: "cp ./dist/vinagreti/index.html ./dist/vinagreti/404.html"
+        run: "cp ./dist/vinagreti/browser/index.html ./dist/vinagreti/browser/404.html"
       - name: Archive build
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: deploy_dist_folder
-          path: dist/vinagreti
+          path: dist/vinagreti/browser
       - name: Archive code coverage result
         if: success()
         uses: actions/upload-artifact@v4
@@ -70,12 +70,12 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: deploy_dist_folder
-          path: dist/vinagreti
+          path: dist/vinagreti/browser
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: "dist/vinagreti"
+          path: "dist/vinagreti/browser"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
