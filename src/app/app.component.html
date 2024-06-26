@@ -1,24 +1,42 @@
 <div
-  class="w-svw h-svh text-primary-contrast bg-secondary"
-  [class]="baseColors$ | async"
+  class="w-svw h-svh"
+  [class]="
+    (templateService.baseColors$ | async) ||
+    'text-secondary-contrast bg-primary'
+  "
 >
-  <div class="flex flex-col w-full h-full" [class]="baseColors$ | async">
-    <div class="flex flex-row items-center justify-between p-4">
-      <div class="flex items-center">Bruno da Silva João - UI Engineer</div>
-      <div class="flex items-center">
+  <div class="flex flex-col max-w-screen-lg min-w-3.5 m-auto">
+    <!-- HEADER -->
+    <div
+      class="flex flex-row flex-wrap gap-y-3 gap-x-16 items-center justify-between p-4 text-xl"
+    >
+      <a class="flex flex-row items-center gap-4 font-bold" routerLink="/">
+        <img src="/assets/images/foto-1.png" alt="" class="w-16 rounded-full" />
+        Bruno da Silva João
+      </a>
+      <div
+        class="flex flex-row items-center gap-4 justify-center md:justify-end flex-grow"
+      >
+        <a routerLink="/projects">Projects</a>
+        <a routerLink="/resume">Resume</a>
+        <a routerLink="/contact">Contact</a>
         <button
-          (click)="toggleTheme()"
-          class="text-xl"
-          *ngIf="(colorScheme$ | async) || 'dark' as colorScheme"
+          (click)="templateService.toggleTheme()"
+          *ngIf="
+            (templateService.colorScheme$ | async) || 'dark' as colorScheme
+          "
         >
           <app-icon
             icon="bulb"
-            [class]="colorScheme === 'dark' ? 'text-highlight' : 'text-primary'"
+            [class]="
+              colorScheme === 'dark' ? 'text-highlight' : 'text-secondary'
+            "
           ></app-icon>
         </button>
       </div>
     </div>
-    <div>
+    <!-- BODY -->
+    <div class="p-4">
       <router-outlet></router-outlet>
     </div>
   </div>
