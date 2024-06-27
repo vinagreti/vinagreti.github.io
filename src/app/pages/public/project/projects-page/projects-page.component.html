@@ -5,17 +5,17 @@
     <div class="flex flex-col gap-6 border border-secondary p-4 rounded-md">
       <div class="text-xl">{{ project.name }}</div>
       <div *ngIf="project.position">{{ project.position }}</div>
-      <div class="flex flex-row gap-4" *ngIf="project.from">
+      <div class="flex flex-row gap-4 text-xs" *ngIf="project.from">
         <div>{{ project.from | date }}</div>
         <div *ngIf="project.to">- {{ project.to | date }}</div>
       </div>
-      <div *ngIf="project.thumb">
+      <a *ngIf="project.thumb" [routerLink]="project.thumb" target="_blank">
         <img
           [src]="project.thumb"
           alt=""
           class="max-h-80 md:max-h-96 max-w-80 md:max-w-96 m-auto"
         />
-      </div>
+      </a>
       <div class="whitespace-pre-wrap">{{ project.desc }}</div>
       <div class="flex flex-col gap-2">
         <div class="text-xs">Tools</div>
