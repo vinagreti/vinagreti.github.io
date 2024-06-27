@@ -1,5 +1,33 @@
 <div class="flex flex-col gap-8">
   <h1 class="text-xl font-bold border-b">Projects</h1>
 
-  <p>Soon!</p>
+  <ng-container *ngFor="let project of projects">
+    <div class="flex flex-col gap-6 border border-secondary p-4 rounded-md">
+      <div class="text-xl">{{ project.name }}</div>
+      <div *ngIf="project.position">{{ project.position }}</div>
+      <div class="flex flex-row gap-4" *ngIf="project.from">
+        <div>{{ project.from | date }}</div>
+        <div *ngIf="project.to">- {{ project.to | date }}</div>
+      </div>
+      <div *ngIf="project.thumb">
+        <img
+          [src]="project.thumb"
+          alt=""
+          class="max-h-80 md:max-h-96 max-w-80 md:max-w-96 m-auto"
+        />
+      </div>
+      <div class="whitespace-pre-wrap">{{ project.desc }}</div>
+      <div class="flex flex-col gap-2">
+        <div class="text-xs">Tools</div>
+        <div class="flex flex-row flex-wrap gap-2">
+          <span
+            class="rounded-md border-accent border-4 px-2"
+            *ngFor="let tool of project.tools"
+          >
+            {{ tool }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>

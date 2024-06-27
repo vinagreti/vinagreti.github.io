@@ -31,7 +31,6 @@ export class IconComponent implements OnChanges {
     })
       .then((res) => res.text())
       .then((value) => {
-        console.log("res", value);
         this.svgIcon = this.sanitizer.bypassSecurityTrustHtml(value);
       });
   }
