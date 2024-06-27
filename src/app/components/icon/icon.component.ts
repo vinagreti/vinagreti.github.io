@@ -26,7 +26,7 @@ export class IconComponent implements OnChanges {
       return;
     }
 
-    fetch(`assets/icons/${this.icon}.svg`, {
+    fetch(`icons/${this.icon}.svg`, {
       headers: { responseType: "text" },
     })
       .then((res) => res.text())
