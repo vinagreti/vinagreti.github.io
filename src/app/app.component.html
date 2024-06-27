@@ -1,17 +1,17 @@
 <div
-  class="w-svw h-svh overflow-auto"
+  class="w-svw h-svh overflow-auto wrapper"
   [class]="
     (templateService.baseColors$ | async) ||
     'text-secondary-contrast bg-primary'
   "
 >
-  <div class="flex flex-col max-w-screen-lg min-w-3.5 m-auto">
+  <div class="flex flex-col max-w-screen-lg m-auto">
     <!-- HEADER -->
     <div
       class="flex flex-row flex-wrap gap-y-3 gap-x-16 items-center justify-between p-4 text-xl"
     >
       <a class="flex flex-row items-center gap-4 font-bold" routerLink="/">
-        <img src="/assets/images/foto-1.png" alt="" class="w-16 rounded-full" />
+        <img src="/assets/images/foto.png" alt="" class="w-16 rounded-full" />
         Bruno João
       </a>
       <div
