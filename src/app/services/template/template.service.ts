@@ -47,7 +47,7 @@ export class TemplateService {
     const browserColorScheme = this.getBrowserColorScheme();
     const inMemoryColorScheme = this.getInMemoryColorScheme();
     const colorScheme = inMemoryColorScheme || browserColorScheme;
-    this.setInMemoryColorScheme(browserColorScheme);
+    this.setInMemoryColorScheme(colorScheme);
     this.colorScheme$.next(colorScheme);
   }
 
