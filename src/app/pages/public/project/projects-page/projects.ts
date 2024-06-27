@@ -30,7 +30,7 @@ The Idea is to showcase some libs, some apps and sideprojects I have done.
     from: "2023-09-19",
     to: "2024-05-29",
     tools: ["Angular", "Redux", "Javascript", "HTML", "CSS", "Node", "Figma"],
-    position: null,
+    position: "Senior UI Engineer",
     github: null,
     thumb: "/images/thumb-slate.png",
     desc:
@@ -49,7 +49,7 @@ As the social media environment changes constantly I have to help the company to
     from: "2022-06-01",
     to: "2023-06-27",
     tools: ["React", "Redux", "Javascript", "HTML", "CSS", "Node", "Figma"],
-    position: null,
+    position: "Senior UI Engineer",
     github: null,
     thumb: "/images/thumb-avail.png",
     desc:
