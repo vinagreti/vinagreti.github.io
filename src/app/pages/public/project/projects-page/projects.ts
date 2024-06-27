@@ -91,7 +91,7 @@ Working with Javascript, Angular, Firebase, Bitbucket, Github Actions, Git, AWS,
     `,
   },
   {
-    name: "Reef.ai",
+    name: "CVC Corp",
     from: "2020-12-01",
     to: "2022-06-26",
     tools: [
@@ -122,6 +122,41 @@ Using micro frontends with react and next.js, using Jira to manage the work flow
 Responsibilities:
 
 As a Developer III I'm responsible by ensure we can solve any problem and create any feature the business needs.
+    `,
+  },
+  {
+    name: "Leve Capital",
+    from: "2019-03-01",
+    to: "2020-12-26",
+    tools: [
+      "Angular",
+      "Javascript",
+      "HTML",
+      "CSS",
+      "Python",
+      "Django",
+    ],
+    position: "Software Engeneering III",
+    github: null,
+    thumb: "/images/thumb-leve.png",
+    desc:
+      `The challenge here is to create the most easy and secure application for people to use financial services (mobile in most of the cases) and, at the same time, support the administration of the business as it grows and became complex (desktop in most of the cases).
+My goal is to develop a well written and documented application ready to scale and have another developers (remotely or in loco) working on it.
+
+Projects:
+
+Employee app;
+Employer app;
+Management app;
+Website;
+
+Key responsibilities:
+
+Building and maintaining client side applications (Angular 8+, Angular + PWA + Redux)
+Building and maintaining server side REST Application (Django, Python, PorstgreSQL, Task Runners)
+Web Server Management;
+SCRUM Master;
+Team Lead/Training;
     `,
   },
 ];
