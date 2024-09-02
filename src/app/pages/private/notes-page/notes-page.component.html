@@ -2,8 +2,16 @@
   <h1>Notes</h1>
 
   <div class="flex flex-col gap-4">
-    <div class="border" *ngFor="let note of notes$ | async">
-      {{ note.title }}
+    <div
+      class="border"
+      *ngFor="let noteGroup of noteGroups$ | async"
+      [routerLink]="['.', noteGroup.id]"
+    >
+      <div>Group: {{ noteGroup.title }}</div>
+      <div class="border pl-4" *ngFor="let note of noteGroup.notes">
+        <b>{{ note.title }}</b>
+        <div>{{ note.content }}</div>
+      </div>
     </div>
   </div>
 </div>

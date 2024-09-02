@@ -1,0 +1,4 @@
+<div class="border pl-4" *ngIf="note$ | async as note">
+  <b>{{ note.title }}</b>
+  <div>{{ note.content }}</div>
+</div>

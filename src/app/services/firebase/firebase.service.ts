@@ -5,8 +5,10 @@ import { Injectable } from "@angular/core";
 import {
   collection,
   CollectionReference,
+  doc,
   DocumentData,
   Firestore,
+  getDoc,
   getDocs,
   getFirestore,
 } from "firebase/firestore/lite";
@@ -39,7 +41,22 @@ export class FirebaseService {
   ) {
     const snapshot = await getDocs(collection);
     const items = snapshot.docs.map((item) => item.data() as T);
-    return items;
+    return { items, snapshot };
+  }
+
+  async get<T = any>(
+    collectionName: string,
+    id: string,
+  ) {
+    const docRef = doc(this.firestore, `${collectionName}/${id}`);
+    const snapshot = await getDoc(docRef);
+    return {
+      snapshot,
+      item: {
+        id: snapshot.id,
+        ...snapshot.data(),
+      } as T,
+    };
   }
 
   private connectToFirebase() {

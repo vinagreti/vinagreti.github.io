@@ -1,0 +1,11 @@
+<div class="border" *ngIf="noteGroup$ | async as noteGroup">
+  <div>Group: {{ noteGroup.title }}</div>
+  <div
+    class="border pl-4"
+    *ngFor="let note of noteGroup.notes"
+    [routerLink]="['.', note.id]"
+  >
+    <b>{{ note.title }}</b>
+    <div>{{ note.content }}</div>
+  </div>
+</div>
