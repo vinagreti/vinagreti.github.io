@@ -1,13 +1,14 @@
+import { AsyncPipe } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
 import { UserService } from "@services/user/user.service";
-import { filter, take } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-login-page",
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, AsyncPipe],
   templateUrl: "./login-page.component.html",
   styleUrl: "./login-page.component.scss",
 })
@@ -20,17 +21,20 @@ export class LoginPageComponent {
 
   password: string = "";
 
-  constructor() {
-    this.redirectWhenLogged();
-  }
+  waitingSigninResponse$ = new BehaviorSubject(false);
 
-  signInWithEmailAndPassword() {
-    this.userService.signInWithEmailAndPassword(this.email, this.password);
-  }
-
-  private redirectWhenLogged() {
-    this.userService.user$.pipe(filter(Boolean), take(1)).subscribe((user) => {
+  async signInWithEmailAndPassword() {
+    this.waitingSigninResponse$.next(true);
+    const { user, error } = await this.userService.signInWithEmailAndPassword(
+      this.email,
+      this.password,
+    );
+    if (user) {
       this.router.navigate(["notes"]);
-    });
+    } else {
+      alert("Wrong credentials!!!");
+      console.log("Failed to login", error.code, error.message);
+    }
+    this.waitingSigninResponse$.next(false);
   }
 }

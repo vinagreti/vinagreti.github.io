@@ -25,10 +25,12 @@
     </div>
     <div>
       <button
-        [disabled]="signinForm.invalid === true"
+        [disabled]="
+          signinForm.invalid === true || (waitingSigninResponse$ | async)
+        "
         (click)="signInWithEmailAndPassword()"
       >
-        Enviar
+        {{ (waitingSigninResponse$ | async) ? "Autenticando..." : "Enviar" }}
       </button>
     </div>
   </form>
