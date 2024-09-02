@@ -6,6 +6,7 @@ import { ContactPageComponent } from "./pages/public/contact-page/contact-page.c
 import { NotesPageComponent } from "./pages/private/notes-page/notes-page.component";
 import { NoteGroupPageComponent } from "./pages/private/note-group-page/note-group-page.component";
 import { NotePageComponent } from "./pages/private/note-page/note-page.component";
+import { LoginPageComponent } from "./pages/public/login-page/login-page.component";
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: "contact",
     component: ContactPageComponent,
+  },
+  {
+    path: "login",
+    component: LoginPageComponent,
   },
   {
     path: "notes/:noteGroupId/:noteId",

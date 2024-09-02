@@ -3,6 +3,7 @@ import { Component, inject } from "@angular/core";
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { IconComponent } from "./components/icon/icon.component";
 import { TemplateService } from "@services/template/template.service";
+import { UserService } from "@services/user/user.service";
 
 @Component({
   selector: "app-root",
@@ -13,4 +14,12 @@ import { TemplateService } from "@services/template/template.service";
 })
 export class AppComponent {
   templateService = inject(TemplateService);
+
+  userService = inject(UserService);
+
+  user$ = this.userService.user$;
+
+  async signOut() {
+    await this.userService.signOut();
+  }
 }

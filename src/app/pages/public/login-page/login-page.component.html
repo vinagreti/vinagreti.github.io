@@ -1,0 +1,35 @@
+<div>
+  <h1>Login</h1>
+  <form class="flex flex-col gap-4 border p-4" #signinForm="ngForm">
+    <div class="border p-4">
+      <input
+        class="text-primary"
+        type="email"
+        name="email"
+        id="email"
+        [(ngModel)]="email"
+        placeholder="e-mail"
+        required
+      />
+    </div>
+    <div class="border p-4">
+      <input
+        class="text-primary"
+        type="password"
+        name="password"
+        id="password"
+        [(ngModel)]="password"
+        placeholder="password"
+        required
+      />
+    </div>
+    <div>
+      <button
+        [disabled]="signinForm.invalid === true"
+        (click)="signInWithEmailAndPassword()"
+      >
+        Enviar
+      </button>
+    </div>
+  </form>
+</div>

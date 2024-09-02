@@ -1,1 +1,1 @@
-export type ICONS = "bulb";
+export type ICONS = "bulb" | "person";

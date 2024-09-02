@@ -15,11 +15,21 @@
         Bruno João
       </a>
       <div
+        *ngIf="user$ | async"
+        class="flex flex-row items-center gap-4 justify-center md:justify-end flex-grow"
+      >
+        <a routerLink="/notes">Notes</a>
+        <button (click)="signOut()">[Logout]</button>
+      </div>
+      <div
         class="flex flex-row items-center gap-4 justify-center md:justify-end flex-grow"
       >
         <a routerLink="/projects">Projects</a>
         <a routerLink="/resume">Resume</a>
         <a routerLink="/contact">Contact</a>
+        <a routerLink="/login" *ngIf="!(user$ | async)">
+          <app-icon icon="person" class="text-highlight"></app-icon>
+        </a>
         <button
           (click)="templateService.toggleTheme()"
           *ngIf="
