@@ -1,5 +1,6 @@
-<div class="border" *ngIf="noteGroup$ | async as noteGroup">
-  <div>Group: {{ noteGroup.title }}</div>
+<div *ngIf="noteGroup$ | async as noteGroup">
+  <h1>{{ noteGroup.title }}</h1>
+
   <div
     class="border pl-4"
     *ngFor="let note of noteGroup.notes"

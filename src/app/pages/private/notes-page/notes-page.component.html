@@ -1,17 +1,15 @@
-<div>
+<div class="flex flex-col gap-4 h-96">
   <h1>Notes</h1>
-
-  <div class="flex flex-col gap-4">
-    <div
-      class="border"
-      *ngFor="let noteGroup of noteGroups$ | async"
-      [routerLink]="['.', noteGroup.id]"
-    >
-      <div>Group: {{ noteGroup.title }}</div>
-      <div class="border pl-4" *ngFor="let note of noteGroup.notes">
-        <b>{{ note.title }}</b>
-        <div>{{ note.content }}</div>
-      </div>
+  <div
+    class="flex flex-col gap-4 h-96"
+    *ngFor="let noteGroup of noteGroups$ | async"
+  >
+    <div>
+      <a [routerLink]="['.', noteGroup.id]">
+        <app-badge>
+          {{ noteGroup.title }}
+        </app-badge>
+      </a>
     </div>
   </div>
 </div>

@@ -4,11 +4,12 @@ import { RouterLink } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
 import { INoteGroup } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
+import { BadgeComponent } from "../../../components/ui/badge/badge.component";
 
 @Component({
   selector: "app-notes-page",
   standalone: true,
-  imports: [NgFor, AsyncPipe, RouterLink],
+  imports: [NgFor, AsyncPipe, RouterLink, BadgeComponent],
   templateUrl: "./notes-page.component.html",
   styleUrl: "./notes-page.component.scss",
 })

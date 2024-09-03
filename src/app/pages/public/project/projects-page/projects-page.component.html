@@ -20,12 +20,9 @@
       <div class="flex flex-col gap-2">
         <div class="text-xs">Tools</div>
         <div class="flex flex-row flex-wrap gap-2">
-          <span
-            class="rounded-md border-accent border-4 px-2"
-            *ngFor="let tool of project.tools"
-          >
+          <app-badge *ngFor="let tool of project.tools">
             {{ tool }}
-          </span>
+          </app-badge>
         </div>
       </div>
     </div>

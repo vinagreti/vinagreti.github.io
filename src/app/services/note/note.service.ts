@@ -15,21 +15,11 @@ export class NoteService {
     const noteGroups = await this.firebaseService.list<INoteGroup>(
       this.collection,
     );
-    const res = noteGroups.snapshot.docs.map(async (doc) => {
-      const notesCollection = collection(doc.ref, "notes");
-      const notesSnapshot = await getDocs(notesCollection);
-      const items = notesSnapshot.docs.map((noteRef) =>
-        noteRef.data() as INote
-      );
-      return items;
-    });
-    const notes = await Promise.all(res);
     return noteGroups.snapshot.docs.map((itemRef, index) => {
       const item = itemRef.data() as INoteGroup;
       return {
         ...item,
         id: itemRef.id,
-        notes: notes[index],
       };
     });
   }
