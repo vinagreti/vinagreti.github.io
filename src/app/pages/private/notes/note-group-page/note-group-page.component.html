@@ -1,6 +1,12 @@
 <div *ngIf="noteGroup$ | async as noteGroup">
-  <h1>{{ noteGroup.title }}</h1>
-
+  <div class="flex justify-between">
+    <h1>{{ noteGroup.title }}</h1>
+    <div class="flex gap-4">
+      <a [routerLink]="['/notes', 'add', noteGroup.id]"
+        ><app-badge>+ note</app-badge></a
+      >
+    </div>
+  </div>
   <div
     class="border pl-4"
     *ngFor="let note of noteGroup.notes"

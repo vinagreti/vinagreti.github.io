@@ -3,6 +3,7 @@ import { Analytics, getAnalytics } from "firebase/analytics";
 
 import { Injectable } from "@angular/core";
 import {
+  addDoc,
   collection,
   CollectionReference,
   doc,
@@ -11,6 +12,7 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  WithFieldValue,
 } from "firebase/firestore/lite";
 
 @Injectable({
@@ -57,6 +59,15 @@ export class FirebaseService {
         ...snapshot.data(),
       } as T,
     };
+  }
+
+  async add<T = any>(
+    collection: CollectionReference<DocumentData, DocumentData>,
+    doc: WithFieldValue<DocumentData>,
+  ) {
+    const snapshot = await addDoc(collection, doc);
+    const item = await getDoc(snapshot) as T;
+    return { item, snapshot };
   }
 
   private connectToFirebase() {

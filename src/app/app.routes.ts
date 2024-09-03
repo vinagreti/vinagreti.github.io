@@ -8,6 +8,7 @@ import { NoteGroupPageComponent } from "./pages/private/notes/note-group-page/no
 import { NotePageComponent } from "./pages/private/notes/note-page/note-page.component";
 import { LoginPageComponent } from "./pages/public/login-page/login-page.component";
 import { NoteAddPageComponent } from "./pages/private/notes/note-add-page/note-add-page.component";
+import { NoteGroupAddPageComponent } from "./pages/private/notes/note-group-add-page/note-group-add-page.component";
 
 export const routes: Routes = [
   {
@@ -33,6 +34,14 @@ export const routes: Routes = [
   {
     path: "notes/add",
     component: NoteAddPageComponent,
+  },
+  {
+    path: "notes/add/groupId",
+    component: NoteAddPageComponent,
+  },
+  {
+    path: "notes/group/add",
+    component: NoteGroupAddPageComponent,
   },
   {
     path: "notes/:noteGroupId/:noteId",

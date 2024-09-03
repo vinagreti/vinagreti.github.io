@@ -67,4 +67,15 @@ export class NoteService {
       return null;
     }
   }
+
+  async add(title: string): Promise<{ noteGroup?: INoteGroup; error?: any }> {
+    return this.firebaseService.add(this.collection, { title })
+      .then((group) => {
+        const noteGroup = group.item;
+        return { noteGroup };
+      })
+      .catch((error) => {
+        return Promise.resolve({ error });
+      });
+  }
 }
