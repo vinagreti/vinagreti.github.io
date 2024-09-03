@@ -23,7 +23,9 @@ export class NoteGroupAddPageComponent {
 
   async addNoteGroup() {
     this.waitingCreation$.next(true);
-    const { error, noteGroup } = await this.noteService.add(this.title);
+    const { error, noteGroup } = await this.noteService.addGroup({
+      title: this.title,
+    });
     if (noteGroup) {
       this.router.navigate(["/notes", noteGroup.id]);
     } else {

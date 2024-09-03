@@ -36,7 +36,7 @@ export const routes: Routes = [
     component: NoteAddPageComponent,
   },
   {
-    path: "notes/add/groupId",
+    path: "notes/add/:noteGroupId",
     component: NoteAddPageComponent,
   },
   {

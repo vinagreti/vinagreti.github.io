@@ -1,6 +1,7 @@
+import { INote } from "@services/note/note.types";
 import { inject, Injectable } from "@angular/core";
 import { FirebaseService } from "@services/firebase/firebase.service";
-import { INote, INoteGroup } from "./note.types";
+import { INoteGroup } from "./note.types";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore/lite";
 
 @Injectable({
@@ -68,8 +69,29 @@ export class NoteService {
     }
   }
 
-  async add(title: string): Promise<{ noteGroup?: INoteGroup; error?: any }> {
-    return this.firebaseService.add(this.collection, { title })
+  async add(
+    groupId: string,
+    doc: Omit<INote, "id">,
+  ): Promise<{ note?: INote; error?: any }> {
+    const noteGroup = await this.firebaseService.get<INoteGroup>(
+      "notes",
+      groupId,
+    );
+    const notesCollection = collection(noteGroup.snapshot.ref, "notes");
+    return this.firebaseService.add<INote>(notesCollection, doc)
+      .then((group) => {
+        const note = group.item;
+        return { note };
+      })
+      .catch((error) => {
+        return Promise.resolve({ error });
+      });
+  }
+
+  async addGroup(
+    doc: Omit<INoteGroup, "id" | "notes">,
+  ): Promise<{ noteGroup?: INoteGroup; error?: any }> {
+    return this.firebaseService.add<INoteGroup>(this.collection, doc)
       .then((group) => {
         const noteGroup = group.item;
         return { noteGroup };
