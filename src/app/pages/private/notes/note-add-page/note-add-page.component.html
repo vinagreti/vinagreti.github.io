@@ -3,6 +3,24 @@
 
   <form class="flex flex-col gap-4 border p-4" #signinForm="ngForm">
     <div class="border p-4">
+      <select
+        class="text-primary"
+        type="noteGroup"
+        name="noteGroup"
+        id="noteGroup"
+        [(ngModel)]="noteGroup"
+        placeholder="noteGroup"
+        required
+      >
+        <option
+          [value]="noteGroup.id"
+          *ngFor="let noteGroup of noteGroups$ | async"
+        >
+          {{ noteGroup.title }}
+        </option>
+      </select>
+    </div>
+    <div class="border p-4">
       <input
         class="text-primary"
         type="title"
