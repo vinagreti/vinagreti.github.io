@@ -3,10 +3,11 @@ import { ProjectsPageComponent } from "./pages/public/project/projects-page/proj
 import { HomePageComponent } from "./pages/public/home-page/home-page.component";
 import { ResumePageComponent } from "./pages/public/resume-page/resume-page.component";
 import { ContactPageComponent } from "./pages/public/contact-page/contact-page.component";
-import { NotesPageComponent } from "./pages/private/notes-page/notes-page.component";
-import { NoteGroupPageComponent } from "./pages/private/note-group-page/note-group-page.component";
-import { NotePageComponent } from "./pages/private/note-page/note-page.component";
+import { NotesPageComponent } from "./pages/private/notes/notes-page/notes-page.component";
+import { NoteGroupPageComponent } from "./pages/private/notes/note-group-page/note-group-page.component";
+import { NotePageComponent } from "./pages/private/notes/note-page/note-page.component";
 import { LoginPageComponent } from "./pages/public/login-page/login-page.component";
+import { NoteAddPageComponent } from "./pages/private/notes/note-add-page/note-add-page.component";
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginPageComponent,
+  },
+  {
+    path: "notes/add",
+    component: NoteAddPageComponent,
   },
   {
     path: "notes/:noteGroupId/:noteId",

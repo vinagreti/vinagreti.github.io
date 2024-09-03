@@ -1,10 +1,10 @@
 import { AsyncPipe, NgFor } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { BadgeComponent } from "@components/ui/badge/badge.component";
 import { NoteService } from "@services/note/note.service";
 import { INoteGroup } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
-import { BadgeComponent } from "../../../components/ui/badge/badge.component";
 
 @Component({
   selector: "app-notes-page",

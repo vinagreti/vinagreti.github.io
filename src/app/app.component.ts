@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { IconComponent } from "./components/icon/icon.component";
+import { IconComponent } from "@components/ui/icon/icon.component";
 import { TemplateService } from "@services/template/template.service";
 import { UserService } from "@services/user/user.service";
 
