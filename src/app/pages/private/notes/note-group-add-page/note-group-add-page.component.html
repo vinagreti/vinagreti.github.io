@@ -5,14 +5,46 @@
     <div class="border p-4">
       <input
         class="text-primary"
-        type="email"
-        name="email"
-        id="email"
+        type="title"
+        name="title"
+        id="title"
         [(ngModel)]="title"
-        placeholder="e-mail"
+        placeholder="title"
         required
       />
     </div>
+
+    <div class="border p-4">
+      <select
+        class="text-primary"
+        type="noteGroupType"
+        name="noteGroupType"
+        id="noteGroupType"
+        [(ngModel)]="noteGroupType"
+        placeholder="noteGroupType"
+        required
+      >
+        <option
+          *ngFor="let noteGroupType of noteGroupTypes"
+          [value]="noteGroupType"
+        >
+          {{ noteGroupType }}
+        </option>
+      </select>
+    </div>
+
+    <div class="border p-4">
+      <input
+        class="text-primary"
+        type="date"
+        name="dueDate"
+        id="dueDate"
+        [(ngModel)]="dueDate"
+        placeholder="dueDate"
+        required
+      />
+    </div>
+
     <div>
       <button
         [disabled]="signinForm.invalid === true || (waitingCreation$ | async)"

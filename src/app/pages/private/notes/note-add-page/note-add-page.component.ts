@@ -3,7 +3,7 @@ import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
-import { INoteGroup } from "@services/note/note.types";
+import { INoteGroup, NOTE_STATUS } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
@@ -24,11 +24,17 @@ export class NoteAddPageComponent {
 
   content: string = "";
 
-  noteGroup: string = this.route.snapshot.params["noteGroupId"];
+  noteStatus: NOTE_STATUS = NOTE_STATUS.PENDING;
+
+  groupId: string = this.route.snapshot.params["noteGroupId"];
+
+  noteGroup: string = this.groupId;
 
   waitingCreation$ = new BehaviorSubject(false);
 
   noteGroups$ = new BehaviorSubject<INoteGroup[]>([]);
+
+  noteStatuses = Object.values(NOTE_STATUS);
 
   constructor() {
     this.loadNoteGroups();
@@ -41,10 +47,13 @@ export class NoteAddPageComponent {
 
   async addNote() {
     this.waitingCreation$.next(true);
+
     const { error, note } = await this.noteService.add(this.noteGroup, {
       title: this.title,
       content: this.content,
+      status: this.noteStatus,
     });
+
     if (note) {
       await this.router.navigate(["/notes", this.noteGroup]);
       this.router.navigate(["/notes", this.noteGroup, note.id]);
@@ -52,6 +61,7 @@ export class NoteAddPageComponent {
       alert("Error adding note group!!!");
       console.log("Error adding note group", error.code, error.message);
     }
+
     this.waitingCreation$.next(false);
   }
 }
