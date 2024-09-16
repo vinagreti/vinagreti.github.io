@@ -1,5 +1,5 @@
 <div *ngIf="noteGroup$ | async as noteGroup" class="flex flex-col gap-2">
-  <div class="flex justify-between">
+  <div class="flex justify-between items-center">
     <h1>{{ noteGroup.title }}</h1>
     <div class="flex gap-4">
       <a [routerLink]="['/notes', 'add', noteGroup.id]"

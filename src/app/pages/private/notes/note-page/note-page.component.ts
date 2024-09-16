@@ -3,7 +3,7 @@ import { Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
 import { INote } from "@services/note/note.types";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, firstValueFrom, map } from "rxjs";
 
 @Component({
   selector: "app-note-page",
@@ -19,13 +19,19 @@ export class NotePageComponent {
 
   route = inject(ActivatedRoute);
 
+  noteGroupId$ = this.route.params.pipe(
+    map((params) => params["noteGroupId"]),
+  );
+
+  noteId$ = this.route.params.pipe(map((params) => params["noteId"]));
+
   constructor() {
     this.loadNote();
   }
 
   private async loadNote() {
-    const noteGroupId = this.route.snapshot.params["noteGroupId"];
-    const noteId = this.route.snapshot.params["noteId"];
+    const noteGroupId = await firstValueFrom(this.noteGroupId$);
+    const noteId = await firstValueFrom(this.noteId$);
     const noteRef = await this.noteService.note(
       noteGroupId,
       noteId,

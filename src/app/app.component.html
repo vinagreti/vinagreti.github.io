@@ -19,7 +19,9 @@
         class="flex flex-row items-center gap-4 justify-center md:justify-end flex-grow"
       >
         <a routerLink="/notes">Notes</a>
-        <button (click)="signOut()">[Logout]</button>
+        <button (click)="signOut()">
+          <app-icon icon="person" class=""></app-icon>
+        </button>
       </div>
       <div
         class="flex flex-row items-center gap-4 justify-center md:justify-end flex-grow"
