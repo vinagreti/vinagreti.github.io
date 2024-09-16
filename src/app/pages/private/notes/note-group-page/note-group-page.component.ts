@@ -29,4 +29,8 @@ export class NoteGroupPageComponent {
     const noteGroup = await this.noteService.group(noteGroupId);
     this.noteGroup$.next(noteGroup);
   }
+
+  copyToClipboard(content: string) {
+    navigator.clipboard.writeText(content);
+  }
 }

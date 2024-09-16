@@ -1,4 +1,4 @@
-<div *ngIf="noteGroup$ | async as noteGroup">
+<div *ngIf="noteGroup$ | async as noteGroup" class="flex flex-col gap-2">
   <div class="flex justify-between">
     <h1>{{ noteGroup.title }}</h1>
     <div class="flex gap-4">
@@ -8,11 +8,25 @@
     </div>
   </div>
   <div
-    class="border pl-4"
+    class="border py-1 px-3"
     *ngFor="let note of noteGroup.notes"
     [routerLink]="['.', note.id]"
   >
-    <b>{{ note.title }}</b>
-    <div>{{ note.content }}</div>
+    <div class="flex gap-4">
+      <div class="grow flex flex-col">
+        <b class="text-accent">{{ note.title }}</b>
+        <div>
+          {{ note.content }}
+        </div>
+      </div>
+      <div class="flex items-center">
+        <button
+          class="border rounded p-2"
+          (click)="$event.stopPropagation(); copyToClipboard(note.content)"
+        >
+          copy
+        </button>
+      </div>
+    </div>
   </div>
 </div>
