@@ -1,8 +1,8 @@
 {
-  "name": "vinagreti",
-  "short_name": "vinagreti",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Bruno João",
+  "short_name": "Bruno",
+  "theme_color": "#161E27",
+  "background_color": "#161E27",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
