@@ -37,7 +37,6 @@ export class NoteGroupPageComponent {
 
   async removeNote(groupId: string, note: INote) {
     const dropResponse = await this.noteService.deleteNote(groupId, note);
-    console.log("dropped", dropResponse);
     return this.loadNoteGroup();
   }
 }

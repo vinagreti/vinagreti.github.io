@@ -34,7 +34,6 @@ export class LoginPageComponent {
       this.router.navigate(["notes"]);
     } else {
       alert("Wrong credentials!!!");
-      console.log("Failed to login", error.code, error.message);
     }
     this.waitingSigninResponse$.next(false);
   }

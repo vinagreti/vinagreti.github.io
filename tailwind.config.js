@@ -11,6 +11,8 @@ module.exports = {
       "accent-contrast": "white",
       highlight: "#6CE5B1",
       "highlight-contrast": "white",
+      disabled: "#BFBFBF",
+      "disabled-contrast": "black",
     },
     extend: {},
   },

@@ -31,7 +31,6 @@ export class NoteGroupAddPageComponent {
   waitingCreation$ = new BehaviorSubject(false);
 
   async addNoteGroup() {
-    console.log("add", this.dueDate);
     this.waitingCreation$.next(true);
     const { error, noteGroup } = await this.noteService.addGroup({
       title: this.title,
