@@ -27,22 +27,26 @@ export class IconComponent {
   svgIcon = signal<SafeHtml | null>(null);
 
   constructor() {
+    this.watchIconChangeAndFetchSvg();
+  }
+
+  private watchIconChangeAndFetchSvg() {
     effect(async () => {
       const icon = this.icon();
       if (icon) {
         const iconSvg = await this.fetchIcon(icon);
         this.svgIcon.set(iconSvg);
       } else {
-        this.svgIcon.set("");
+        this.svgIcon.set(null);
       }
     });
   }
 
-  private fetchIcon(icon: ICONS) {
-    return fetch(`icons/${icon}.svg`, {
-      headers: { responseType: "text" },
-    })
-      .then((res) => res.text())
-      .then((value) => this.sanitizer.bypassSecurityTrustHtml(value));
+  private async fetchIcon(icon: ICONS) {
+    const url = `icons/${icon}.svg`;
+    const rawResponse = await fetch(url, { headers: { responseType: "text" } });
+    const textResponse = await rawResponse.text();
+    const html = this.sanitizer.bypassSecurityTrustHtml(textResponse);
+    return html;
   }
 }
