@@ -5,7 +5,7 @@ export enum NOTE_STATUS {
 
 export enum NOTE_GROUP_TYPE {
   REGULAR = "REGULAR",
-  TODO = "TODO",
+  TODO = "TO-DO",
 }
 
 export type INote = {
@@ -19,5 +19,6 @@ export type INoteGroup = {
   id: string;
   title: string;
   notes: INote[];
+  dueDate?: string;
   type: NOTE_GROUP_TYPE;
 };

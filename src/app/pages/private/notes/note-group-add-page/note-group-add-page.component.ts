@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
 import { NOTE_GROUP_TYPE } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
+import { format } from "date-fns";
 
 @Component({
   selector: "app-note-group-add-page",
@@ -25,19 +26,17 @@ export class NoteGroupAddPageComponent {
 
   noteGroupTypes = Object.values(NOTE_GROUP_TYPE);
 
+  dueDate: string = format(new Date(), "yyyy-MM-dd");
+
   waitingCreation$ = new BehaviorSubject(false);
 
-  dueDate: string = "";
-
-  constructor() {
-    console.log("noteGroupTypes", this.noteGroupTypes);
-  }
-
   async addNoteGroup() {
+    console.log("add", this.dueDate);
     this.waitingCreation$.next(true);
     const { error, noteGroup } = await this.noteService.addGroup({
       title: this.title,
       type: this.noteGroupType,
+      dueDate: this.dueDate,
     });
     if (noteGroup) {
       this.router.navigate(["/notes", noteGroup.id]);

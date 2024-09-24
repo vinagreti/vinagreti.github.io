@@ -1,28 +1,8 @@
-<div class="flex flex-col gap-4 h-96 h-full">
+<div class="flex flex-col gap-4 h-full">
   <h1>New note</h1>
 
-  <form class="flex flex-col gap-4 border p-4" #signinForm="ngForm">
-    <div class="border p-4">
-      <select
-        class="text-primary"
-        type="noteGroup"
-        name="noteGroup"
-        id="noteGroup"
-        [(ngModel)]="noteGroup"
-        placeholder="noteGroup"
-        [disabled]="!!groupId"
-        required
-      >
-        <option
-          [value]="noteGroup.id"
-          *ngFor="let noteGroup of noteGroups$ | async"
-        >
-          {{ noteGroup.title }}
-        </option>
-      </select>
-    </div>
-
-    <div class="border p-4">
+  <form class="flex flex-col gap-4" #signinForm="ngForm">
+    <div>
       <input
         class="text-primary"
         type="title"
@@ -34,7 +14,7 @@
       />
     </div>
 
-    <div class="border p-4">
+    <div>
       <input
         class="text-primary"
         type="content"
@@ -46,20 +26,42 @@
       />
     </div>
 
-    <div class="border p-4">
-      <select
-        class="text-primary"
-        type="noteStatus"
-        name="noteStatus"
-        id="noteStatus"
-        [(ngModel)]="noteStatus"
-        placeholder="noteStatus"
-        required
-      >
-        <option *ngFor="let noteStatus of noteStatuses" [value]="noteStatus">
-          {{ noteStatus }}
-        </option>
-      </select>
+    <div class="flex gap-4">
+      <div class="grow">
+        <select
+          class="text-primary"
+          type="noteGroup"
+          name="noteGroup"
+          id="noteGroup"
+          [(ngModel)]="noteGroup"
+          placeholder="noteGroup"
+          [disabled]="!!groupId"
+          required
+        >
+          <option
+            [value]="noteGroup.id"
+            *ngFor="let noteGroup of noteGroups$ | async"
+          >
+            {{ noteGroup.title }}
+          </option>
+        </select>
+      </div>
+
+      <div class="grow">
+        <select
+          class="text-primary"
+          type="noteStatus"
+          name="noteStatus"
+          id="noteStatus"
+          [(ngModel)]="noteStatus"
+          placeholder="noteStatus"
+          required
+        >
+          <option *ngFor="let noteStatus of noteStatuses" [value]="noteStatus">
+            {{ noteStatus }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div>

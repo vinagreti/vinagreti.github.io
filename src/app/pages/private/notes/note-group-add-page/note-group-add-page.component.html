@@ -1,8 +1,8 @@
-<div class="flex flex-col gap-4 h-96">
+<div class="flex flex-col gap-4 h-full">
   <h1>New note group</h1>
 
-  <form class="flex flex-col gap-4 border p-4" #signinForm="ngForm">
-    <div class="border p-4">
+  <form class="flex flex-col gap-4" #signinForm="ngForm">
+    <div>
       <input
         class="text-primary"
         type="title"
@@ -14,35 +14,38 @@
       />
     </div>
 
-    <div class="border p-4">
-      <select
-        class="text-primary"
-        type="noteGroupType"
-        name="noteGroupType"
-        id="noteGroupType"
-        [(ngModel)]="noteGroupType"
-        placeholder="noteGroupType"
-        required
-      >
-        <option
-          *ngFor="let noteGroupType of noteGroupTypes"
-          [value]="noteGroupType"
-        >
-          {{ noteGroupType }}
-        </option>
-      </select>
-    </div>
+    <div class="flex gap-4">
+      <div class="grow">
+        <input
+          class="text-primary"
+          type="date"
+          name="dueDate"
+          id="dueDate"
+          [(ngModel)]="dueDate"
+          placeholder="dueDate"
+          required
+          onfocus="this.showPicker()"
+        />
+      </div>
 
-    <div class="border p-4">
-      <input
-        class="text-primary"
-        type="date"
-        name="dueDate"
-        id="dueDate"
-        [(ngModel)]="dueDate"
-        placeholder="dueDate"
-        required
-      />
+      <div class="grow">
+        <select
+          class="text-primary"
+          type="noteGroupType"
+          name="noteGroupType"
+          id="noteGroupType"
+          [(ngModel)]="noteGroupType"
+          placeholder="noteGroupType"
+          required
+        >
+          <option
+            *ngFor="let noteGroupType of noteGroupTypes"
+            [value]="noteGroupType"
+          >
+            {{ noteGroupType }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div>

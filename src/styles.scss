@@ -18,3 +18,26 @@ h1 {
   border-bottom: 3px solid grey;
   margin-bottom: 16px;
 }
+
+input,
+select {
+  @apply w-full bg-primary-contrast border rounded py-1 px-2 m-0 text-primary caret-accent;
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.button,
+button {
+  @apply border rounded border-accent py-2 px-3;
+
+  &.raw-button {
+    border: 0px;
+    padding: 0px;
+  }
+}
