@@ -19,13 +19,23 @@
           {{ note.content }}
         </div>
       </div>
-      <div class="flex items-center">
-        <button
-          class="border rounded p-2"
-          (click)="$event.stopPropagation(); copyToClipboard(note.content)"
-        >
-          copy
-        </button>
+      <div class="flex items-center gap-2">
+        <div>
+          <button
+            class="border rounded p-2 px-4"
+            (click)="$event.stopPropagation(); copyToClipboard(note.content)"
+          >
+            copy
+          </button>
+        </div>
+        <div>
+          <button
+            class="border rounded border-accent py-2 px-4"
+            (click)="$event.stopPropagation(); removeNote(noteGroup.id, note)"
+          >
+            x
+          </button>
+        </div>
       </div>
     </div>
   </div>

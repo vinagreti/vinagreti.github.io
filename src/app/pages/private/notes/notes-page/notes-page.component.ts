@@ -22,6 +22,16 @@ export class NotesPageComponent {
     this.loadNoteGroups();
   }
 
+  trackBy(index: number, item: INoteGroup) {
+    return item.id;
+  }
+
+  async removeNoteGroup(noteGroup: INoteGroup) {
+    const dropResponse = await this.noteService.deleteGroup(noteGroup);
+    console.log("dropped", dropResponse);
+    return this.loadNoteGroups();
+  }
+
   private async loadNoteGroups() {
     const noteGroups = await this.noteService.list();
     this.noteGroups$.next(noteGroups);

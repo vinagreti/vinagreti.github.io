@@ -2,7 +2,13 @@ import { INote } from "@services/note/note.types";
 import { inject, Injectable } from "@angular/core";
 import { FirebaseService } from "@services/firebase/firebase.service";
 import { INoteGroup } from "./note.types";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore/lite";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore/lite";
 
 @Injectable({
   providedIn: "root",
@@ -99,5 +105,40 @@ export class NoteService {
       .catch((error) => {
         return Promise.resolve({ error });
       });
+  }
+
+  async deleteGroup(group: INoteGroup) {
+    const confirmed = await confirm(
+      `Do you want to remove group "${group.title}"`,
+    );
+    if (confirmed) {
+      const noteGroup = await this.firebaseService.get<INoteGroup>(
+        "notes",
+        group.id,
+      );
+      const res = await deleteDoc(noteGroup.snapshot.ref);
+      return res;
+    } else {
+      return undefined;
+    }
+  }
+
+  async deleteNote(groupId: string, note: INote) {
+    const confirmed = await confirm(
+      `Do you want to remove note "${note.title}"`,
+    );
+    if (confirmed) {
+      const noteGroup = await this.firebaseService.get<INoteGroup>(
+        "notes",
+        groupId,
+      );
+      const notesCollectionRef = collection(noteGroup.snapshot.ref, "notes");
+      const docRef = doc(notesCollectionRef, note.id);
+      const snapshot = await getDoc(docRef);
+      const res = await deleteDoc(snapshot.ref);
+      return res;
+    } else {
+      return undefined;
+    }
   }
 }

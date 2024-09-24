@@ -3,7 +3,7 @@ import { Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { BadgeComponent } from "@components/ui/badge/badge.component";
 import { NoteService } from "@services/note/note.service";
-import { INoteGroup } from "@services/note/note.types";
+import { INote, INoteGroup } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
@@ -24,13 +24,19 @@ export class NoteGroupPageComponent {
     this.loadNoteGroup();
   }
 
+  copyToClipboard(content: string) {
+    navigator.clipboard.writeText(content);
+  }
+
   private async loadNoteGroup() {
     const noteGroupId = this.route.snapshot.params["noteGroupId"];
     const noteGroup = await this.noteService.group(noteGroupId);
     this.noteGroup$.next(noteGroup);
   }
 
-  copyToClipboard(content: string) {
-    navigator.clipboard.writeText(content);
+  async removeNote(groupId: string, note: INote) {
+    const dropResponse = await this.noteService.deleteNote(groupId, note);
+    console.log("dropped", dropResponse);
+    return this.loadNoteGroup();
   }
 }
