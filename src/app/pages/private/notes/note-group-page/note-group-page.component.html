@@ -7,7 +7,7 @@
       >
     </div>
   </div>
-  <div
+  <a
     class="border py-1 px-3"
     *ngFor="let note of noteGroup.notes"
     [routerLink]="['.', note.id]"
@@ -15,9 +15,7 @@
     <div class="flex gap-4">
       <div class="grow flex flex-col">
         <b class="text-accent">{{ note.title }}</b>
-        <div>
-          {{ note.content }}
-        </div>
+        <div>{{ note.content }}</div>
       </div>
       <div class="flex items-center gap-2">
         <div>
@@ -31,12 +29,16 @@
         <div>
           <button
             class="border rounded border-accent py-2 px-4"
-            (click)="$event.stopPropagation(); removeNote(noteGroup.id, note)"
+            (click)="
+              $event.stopPropagation();
+              $event.preventDefault();
+              removeNote(noteGroup.id, note)
+            "
           >
             x
           </button>
         </div>
       </div>
     </div>
-  </div>
+  </a>
 </div>
