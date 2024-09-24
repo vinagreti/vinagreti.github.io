@@ -2,40 +2,48 @@
   <h1>Compound interest</h1>
 
   <form class="flex flex-col gap-2" (submit)="calc()">
-    <div>
+    <div class="flex gap-2 items-center">
+      <label for="initialValue" class="w-20">Initial</label>
       <input
         type="number"
         name="initialValue"
         id="initialValue"
         placeholder="initialValue"
         [(ngModel)]="data.initialValue"
+        required
       />
     </div>
-    <div>
+    <div class="flex gap-2 items-center">
+      <label for="monthlyDeposit" class="w-20">Montlhy</label>
       <input
         type="number"
         name="monthlyDeposit"
         id="monthlyDeposit"
         placeholder="monthlyDeposit"
         [(ngModel)]="data.monthlyDeposit"
+        required
       />
     </div>
-    <div>
+    <div class="flex gap-2 items-center">
+      <label for="interest" class="w-20">Interest</label>
       <input
         type="number"
         name="interest"
         id="interest"
         placeholder="interest"
         [(ngModel)]="data.interest"
+        required
       />
     </div>
-    <div>
+    <div class="flex gap-2 items-center">
+      <label for="times" class="w-20">Times</label>
       <input
         type="number"
         name="times"
         id="times"
         placeholder="times"
         [(ngModel)]="data.times"
+        required
       />
     </div>
 
@@ -44,5 +52,7 @@
     </div>
   </form>
 
-  <div>Total: {{ total$ | async }}</div>
+  <div>Total com juros: {{ totalWithInterest$ | async | currency }}</div>
+  <div>Total sem juros: {{ totalWithoutInterest$ | async | currency }}</div>
+  <div>Ganho: {{ gain$ | async | currency }}</div>
 </div>
