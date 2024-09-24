@@ -21,7 +21,7 @@ h1 {
 
 input,
 select {
-  @apply w-full bg-primary-contrast border rounded py-1 px-2 m-0 text-primary caret-accent;
+  @apply w-full bg-primary-contrast border rounded py-2 px-4 m-0 text-xl text-primary caret-accent;
 }
 
 @layer base {
