@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
@@ -9,6 +9,7 @@ import { BehaviorSubject } from "rxjs";
 @Component({
   selector: "app-note-add-page",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AsyncPipe, FormsModule, NgFor],
   templateUrl: "./note-add-page.component.html",
   styleUrl: "./note-add-page.component.scss",

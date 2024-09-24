@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: "app-home-page",
+  selector: "app-tools-page",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
-  templateUrl: "./home-page.component.html",
-  styleUrl: "./home-page.component.scss",
+  templateUrl: "./tools-page.component.html",
+  styleUrl: "./tools-page.component.scss",
 })
-export class HomePageComponent {
+export class ToolsPageComponent {
 }

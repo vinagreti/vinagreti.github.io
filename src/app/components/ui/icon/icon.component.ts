@@ -1,6 +1,12 @@
-import { Component, inject, Input, OnChanges } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
-
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  signal,
+} from "@angular/core";
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { ICONS } from "./icons";
 
 @Component({
@@ -8,30 +14,35 @@ import { ICONS } from "./icons";
   templateUrl: "./icon.component.html",
   styleUrls: ["./icon.component.scss"],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [],
 })
-export class IconComponent implements OnChanges {
+export class IconComponent {
   private sanitizer = inject(DomSanitizer);
 
-  @Input()
-  icon?: ICONS;
+  icon = input.required<ICONS>();
 
-  @Input()
-  size = "inherit";
+  size = input<string>("inherit");
 
-  svgIcon: any;
+  svgIcon = signal<SafeHtml | null>(null);
 
-  ngOnChanges(): void {
-    if (!this.icon) {
-      this.svgIcon = "";
-      return;
-    }
+  constructor() {
+    effect(async () => {
+      const icon = this.icon();
+      if (icon) {
+        const iconSvg = await this.fetchIcon(icon);
+        this.svgIcon.set(iconSvg);
+      } else {
+        this.svgIcon.set("");
+      }
+    });
+  }
 
-    fetch(`icons/${this.icon}.svg`, {
+  private fetchIcon(icon: ICONS) {
+    return fetch(`icons/${icon}.svg`, {
       headers: { responseType: "text" },
     })
       .then((res) => res.text())
-      .then((value) => {
-        this.svgIcon = this.sanitizer.bypassSecurityTrustHtml(value);
-      });
+      .then((value) => this.sanitizer.bypassSecurityTrustHtml(value));
   }
 }

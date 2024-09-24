@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
 import { UserService } from "@services/user/user.service";
@@ -8,6 +8,7 @@ import { BehaviorSubject } from "rxjs";
 @Component({
   selector: "app-login-page",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, RouterModule, AsyncPipe],
   templateUrl: "./login-page.component.html",
   styleUrl: "./login-page.component.scss",

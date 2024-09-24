@@ -1,0 +1,48 @@
+<div class="flex flex-col gap-4">
+  <h1>Compound interest</h1>
+
+  <form class="flex flex-col gap-2" (submit)="calc()">
+    <div>
+      <input
+        type="number"
+        name="initialValue"
+        id="initialValue"
+        placeholder="initialValue"
+        [(ngModel)]="data.initialValue"
+      />
+    </div>
+    <div>
+      <input
+        type="number"
+        name="monthlyDeposit"
+        id="monthlyDeposit"
+        placeholder="monthlyDeposit"
+        [(ngModel)]="data.monthlyDeposit"
+      />
+    </div>
+    <div>
+      <input
+        type="number"
+        name="interest"
+        id="interest"
+        placeholder="interest"
+        [(ngModel)]="data.interest"
+      />
+    </div>
+    <div>
+      <input
+        type="number"
+        name="times"
+        id="times"
+        placeholder="times"
+        [(ngModel)]="data.times"
+      />
+    </div>
+
+    <div>
+      <button type="submit">Calculate</button>
+    </div>
+  </form>
+
+  <div>Total: {{ total$ | async }}</div>
+</div>

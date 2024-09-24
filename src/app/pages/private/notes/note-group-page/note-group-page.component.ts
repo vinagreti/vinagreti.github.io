@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { BadgeComponent } from "@components/ui/badge/badge.component";
 import { NoteService } from "@services/note/note.service";
@@ -9,6 +9,7 @@ import { BehaviorSubject } from "rxjs";
 @Component({
   selector: "app-note-group-page",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AsyncPipe, NgFor, NgIf, RouterModule, BadgeComponent],
   templateUrl: "./note-group-page.component.html",
   styleUrl: "./note-group-page.component.scss",

@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
 import { INote } from "@services/note/note.types";
@@ -8,6 +8,7 @@ import { BehaviorSubject, firstValueFrom, map } from "rxjs";
 @Component({
   selector: "app-note-page",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgIf, AsyncPipe, RouterModule],
   templateUrl: "./note-page.component.html",
   styleUrl: "./note-page.component.scss",
