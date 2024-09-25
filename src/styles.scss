@@ -49,3 +49,7 @@ button {
     @apply bg-disabled text-disabled-contrast border-none;
   }
 }
+
+input:invalid {
+  border-color: red;
+}

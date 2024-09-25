@@ -1,58 +1,102 @@
 <div class="flex flex-col gap-4">
   <h1>Compound interest</h1>
 
-  <form class="flex flex-col gap-2" (submit)="calc()">
-    <div class="flex gap-2 items-center">
-      <label for="initialValue" class="w-20">Initial</label>
-      <input
-        type="number"
-        name="initialValue"
-        id="initialValue"
-        placeholder="initialValue"
-        [(ngModel)]="data.initialValue"
-        required
-      />
-    </div>
-    <div class="flex gap-2 items-center">
-      <label for="monthlyDeposit" class="w-20">Montlhy</label>
-      <input
-        type="number"
-        name="monthlyDeposit"
-        id="monthlyDeposit"
-        placeholder="monthlyDeposit"
-        [(ngModel)]="data.monthlyDeposit"
-        required
-      />
-    </div>
-    <div class="flex gap-2 items-center">
-      <label for="interest" class="w-20">Interest</label>
-      <input
-        type="number"
-        name="interest"
-        id="interest"
-        placeholder="interest"
-        [(ngModel)]="data.interest"
-        required
-      />
-    </div>
-    <div class="flex gap-2 items-center">
-      <label for="times" class="w-20">Times</label>
-      <input
-        type="number"
-        name="times"
-        id="times"
-        placeholder="times"
-        [(ngModel)]="data.times"
-        required
-      />
-    </div>
+  <div class="flex gap-4">
+    <form class="grow flex flex-col gap-2" #form="ngForm">
+      <div class="flex gap-2 items-center">
+        <label for="initialValue" class="w-28">Initial</label>
+        <input
+          type="number"
+          name="initialValue"
+          id="initialValue"
+          placeholder="Initial value"
+          [(ngModel)]="data.initialValue"
+          (ngModelChange)="form.valid && calc()"
+          required
+        />
+      </div>
+      <div class="flex gap-2 items-center">
+        <label for="monthlyDeposit" class="w-28">Montlhy</label>
+        <input
+          type="number"
+          name="monthlyDeposit"
+          id="monthlyDeposit"
+          placeholder="Monthly deposit"
+          [(ngModel)]="data.monthlyDeposit"
+          (ngModelChange)="form.valid && calc()"
+          required
+        />
+      </div>
+      <div class="flex gap-2 items-center">
+        <label for="interest" class="w-28">Interest</label>
+        <input
+          type="number"
+          name="interest"
+          id="interest"
+          placeholder="Interest from 0 to 100"
+          [(ngModel)]="data.interest"
+          (ngModelChange)="form.valid && calc()"
+          required
+        />
+      </div>
+      <div class="flex gap-2 items-center">
+        <label for="times" class="w-28">Times</label>
+        <input
+          type="number"
+          name="times"
+          id="times"
+          placeholder="Number of times"
+          [(ngModel)]="data.times"
+          (ngModelChange)="form.valid && calc()"
+          [min]="1"
+          [max]="240"
+          required
+        />
+      </div>
+    </form>
 
-    <div>
-      <button type="submit">Calculate</button>
+    <div class="border rounded w-40">
+      <div>
+        <div>Added:</div>
+        <b class="text-accent">
+          {{ totalWithoutInterest$ | async | currency : "BRL" }}
+        </b>
+      </div>
+      <div>
+        <div>Gains:</div>
+        <b class="text-accent">{{ gain$ | async | currency : "BRL" }}</b>
+      </div>
+      <div>
+        <div>Final:</div>
+        <b class="text-accent">
+          {{ totalWithInterest$ | async | currency : "BRL" }}
+        </b>
+      </div>
     </div>
-  </form>
+  </div>
 
-  <div>Total com juros: {{ totalWithInterest$ | async | currency }}</div>
-  <div>Total sem juros: {{ totalWithoutInterest$ | async | currency }}</div>
-  <div>Ganho: {{ gain$ | async | currency }}</div>
+  <div class="flex flex-col gap-1">
+    <div class="flex">
+      <div class="w-12 border p-1 text-xs">Index</div>
+      <div class="grow basis-0 border p-1 text-xs">Deposit</div>
+      <div class="grow basis-0 border p-1 text-xs">Total</div>
+      <div class="grow basis-0 border p-1 text-xs">Interest</div>
+    </div>
+    <ng-container *ngFor="let installment of installments$ | async">
+      <div class="flex">
+        <div class="w-12 border p-1 text-xs">
+          {{ installment.index }}
+        </div>
+        <div class="grow basis-0 border p-1 text-xs">
+          {{ installment.monthlyDeposit | currency : "BRL" }}
+        </div>
+        <div class="grow basis-0 border p-1 text-xs">
+          {{ installment.totalWithInterest | currency : "BRL" }}
+        </div>
+        <div class="grow basis-0 border p-1 text-xs">
+          {{ installment.interest | currency : "BRL" }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>

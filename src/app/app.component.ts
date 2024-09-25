@@ -4,12 +4,20 @@ import { RouterLink, RouterOutlet } from "@angular/router";
 import { IconComponent } from "@components/ui/icon/icon.component";
 import { TemplateService } from "@services/template/template.service";
 import { UserService } from "@services/user/user.service";
+import { CoreModule } from "./core/core.module";
 
 @Component({
   selector: "app-root",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterOutlet, RouterLink, AsyncPipe, NgIf, IconComponent],
+  imports: [
+    CoreModule,
+    RouterOutlet,
+    RouterLink,
+    AsyncPipe,
+    NgIf,
+    IconComponent,
+  ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
