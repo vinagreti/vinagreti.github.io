@@ -17,7 +17,7 @@ type ColorScheme = "light" | "dark";
   providedIn: "root",
 })
 export class TemplateService {
-  colorScheme$ = new ReplaySubject<ColorScheme>();
+  colorScheme$ = new ReplaySubject<ColorScheme>(1);
 
   baseColors$ = this.colorScheme$.pipe(map((colorScheme) => {
     const baseColors = colorScheme === "dark"

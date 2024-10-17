@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-4">
+  <h1>Snake game</h1>
+
+  <div class="flex flex-wrap">
+    <ng-container *ngFor="let tile of tiles(); trackBy: trackByFn">
+      <div [ngStyle]="{ width: 100 / boardSize() + '%' }">
+        <div
+          class="h-0 border"
+          [ngStyle]="{ paddingBottom: '100%', backgroundColor: tile }"
+        ></div>
+      </div>
+    </ng-container>
+  </div>
+</div>

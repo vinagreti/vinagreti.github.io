@@ -13,6 +13,7 @@ export type INote = {
   title: string;
   content: string;
   status?: NOTE_STATUS;
+  check?: boolean;
 };
 
 export type INoteGroup = {
@@ -21,4 +22,5 @@ export type INoteGroup = {
   notes: INote[];
   dueDate?: string;
   type: NOTE_GROUP_TYPE;
+  toggle?: boolean;
 };

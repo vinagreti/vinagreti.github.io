@@ -3,20 +3,50 @@
     <a class="button" [routerLink]="['/notes']"><- Back</a>
   </div>
   <div *ngIf="noteGroup$ | async as noteGroup" class="flex flex-col gap-2">
-    <div class="flex justify-between items-center">
-      <h1>{{ noteGroup.title }}</h1>
+    <form class="flex justify-between items-center">
+      <div>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          [(ngModel)]="noteGroup.title"
+          (ngModelChange)="onChangeGroup(noteGroup)"
+        />
+      </div>
       <div class="flex gap-4">
+        <div class="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="groupToogle"
+            id="groupToogle"
+            class="w-10 h-10"
+            [(ngModel)]="noteGroup.toggle"
+            (ngModelChange)="onChangeGroup(noteGroup)"
+            title="To-Do group"
+          />
+        </div>
         <a class="button block" [routerLink]="['/notes', 'add', noteGroup.id]"
           >+ note</a
         >
       </div>
-    </div>
+    </form>
     <a
       class="border py-1 px-3"
       *ngFor="let note of noteGroup.notes"
       [routerLink]="['.', note.id]"
     >
       <div class="flex gap-4">
+        <div class="flex items-center gap-2" *ngIf="noteGroup.toggle">
+          <input
+            type="checkbox"
+            name="groupToogle"
+            id="groupToogle"
+            class="w-10 h-10"
+            [(ngModel)]="note.check"
+            (ngModelChange)="onChangeNote(noteGroup, note)"
+            (click)="$event.stopPropagation()"
+          />
+        </div>
         <div class="grow flex flex-col">
           <b class="text-accent">{{ note.title }}</b>
           <div>{{ note.content }}</div>

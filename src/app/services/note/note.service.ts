@@ -8,6 +8,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore/lite";
 
 @Injectable({
@@ -140,5 +141,26 @@ export class NoteService {
     } else {
       return undefined;
     }
+  }
+
+  async editGroup(group: INoteGroup) {
+    const noteGroup = await this.firebaseService.get<INoteGroup>(
+      "notes",
+      group.id,
+    );
+    const res = await updateDoc(noteGroup.snapshot.ref, group);
+    return res;
+  }
+
+  async editNote(groupId: string, note: INote) {
+    const noteGroup = await this.firebaseService.get<INoteGroup>(
+      "notes",
+      groupId,
+    );
+    const notesCollectionRef = collection(noteGroup.snapshot.ref, "notes");
+    const docRef = doc(notesCollectionRef, note.id);
+    const snapshot = await getDoc(docRef);
+    const res = await updateDoc(snapshot.ref, note);
+    return res;
   }
 }
