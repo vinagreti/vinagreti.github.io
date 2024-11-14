@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-4 h-full">
   <h1>New note</h1>
 
-  <form class="flex flex-col gap-4" #signinForm="ngForm">
+  <form class="flex flex-col gap-4" #noteAddForm="ngForm" (submit)="addNote()">
     <div>
       <input
         class="text-primary"
@@ -15,15 +15,14 @@
     </div>
 
     <div>
-      <input
+      <textarea
         class="text-primary"
         type="content"
         name="content"
         id="content"
         [(ngModel)]="content"
         placeholder="content"
-        required
-      />
+      ></textarea>
     </div>
 
     <div class="flex gap-4">
@@ -66,8 +65,7 @@
 
     <div>
       <button
-        [disabled]="signinForm.invalid === true || (waitingCreation$ | async)"
-        (click)="addNote()"
+        [disabled]="noteAddForm.invalid === true || (waitingCreation$ | async)"
       >
         {{ (waitingCreation$ | async) ? "Autenticando..." : "Criar" }}
       </button>

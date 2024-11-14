@@ -3,8 +3,12 @@ import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NoteService } from "@services/note/note.service";
-import { INoteGroup, NOTE_STATUS } from "@services/note/note.types";
-import { BehaviorSubject } from "rxjs";
+import {
+  INoteGroup,
+  NOTE_GROUP_TYPE,
+  NOTE_STATUS,
+} from "@services/note/note.types";
+import { ReplaySubject } from "rxjs";
 
 @Component({
   selector: "app-note-add-page",
@@ -27,18 +31,28 @@ export class NoteAddPageComponent {
 
   noteStatus: NOTE_STATUS = NOTE_STATUS.PENDING;
 
+  noteGroupType = NOTE_GROUP_TYPE;
+
   groupId: string = this.route.snapshot.params["noteGroupId"];
 
   noteGroup: string = this.groupId;
 
-  waitingCreation$ = new BehaviorSubject(false);
+  waitingCreation$ = new ReplaySubject<boolean>(1);
 
-  noteGroups$ = new BehaviorSubject<INoteGroup[]>([]);
+  noteGroups$ = new ReplaySubject<INoteGroup[]>(1);
+
+  noteGroup$ = new ReplaySubject<INoteGroup>(1);
 
   noteStatuses = Object.values(NOTE_STATUS);
 
   constructor() {
     this.loadNoteGroups();
+    this.loadNoteGroup();
+  }
+
+  private async loadNoteGroup() {
+    const noteGroup = await this.noteService.group(this.groupId);
+    this.noteGroup$.next(noteGroup);
   }
 
   private async loadNoteGroups() {
@@ -53,11 +67,13 @@ export class NoteAddPageComponent {
       title: this.title,
       content: this.content,
       status: this.noteStatus,
+      created: Date.now(),
+      updated: Date.now(),
     });
 
     if (note) {
       await this.router.navigate(["/notes", this.noteGroup]);
-      this.router.navigate(["/notes", this.noteGroup, note.id]);
+      this.router.navigate(["/notes", this.noteGroup]);
     } else {
       alert("Error adding note!!!");
       console.log("Error adding note", error.code, error.message);

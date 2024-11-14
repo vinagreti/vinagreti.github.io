@@ -8,6 +8,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
+  query,
   updateDoc,
 } from "firebase/firestore/lite";
 
@@ -38,7 +40,8 @@ export class NoteService {
       groupId,
     );
     const notesCollection = collection(noteGroup.snapshot.ref, "notes");
-    const notesSnapshot = await getDocs(notesCollection);
+    const selectionQuery = query(notesCollection, orderBy("updated", "desc"));
+    const notesSnapshot = await getDocs(selectionQuery);
     const notes = notesSnapshot.docs.map((noteRef) => {
       return {
         ...noteRef.data(),

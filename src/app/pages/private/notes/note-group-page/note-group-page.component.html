@@ -1,8 +1,11 @@
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 h-full">
   <div>
     <a class="button" [routerLink]="['/notes']"><- Back</a>
   </div>
-  <div *ngIf="noteGroup$ | async as noteGroup" class="flex flex-col gap-2">
+  <div
+    *ngIf="noteGroup$ | async as noteGroup"
+    class="flex flex-col gap-2 overflow-auto"
+  >
     <form class="flex justify-between items-center">
       <div>
         <input
@@ -25,55 +28,109 @@
             title="To-Do group"
           />
         </div>
-        <a class="button block" [routerLink]="['/notes', 'add', noteGroup.id]"
-          >+ note</a
-        >
-      </div>
-    </form>
-    <a
-      class="border py-1 px-3"
-      *ngFor="let note of noteGroup.notes"
-      [routerLink]="['.', note.id]"
-    >
-      <div class="flex gap-4">
-        <div class="flex items-center gap-2" *ngIf="noteGroup.toggle">
-          <input
-            type="checkbox"
-            name="groupToogle"
-            id="groupToogle"
-            class="w-10 h-10"
-            [(ngModel)]="note.check"
-            (ngModelChange)="onChangeNote(noteGroup, note)"
-            (click)="$event.stopPropagation()"
-          />
-        </div>
-        <div class="grow flex flex-col">
-          <b class="text-accent">{{ note.title }}</b>
-          <div>{{ note.content }}</div>
+        <div class="flex items-center gap-2">
+          <select
+            class="text-primary"
+            type="noteGroupType"
+            name="noteGroupType"
+            id="noteGroupType"
+            [(ngModel)]="noteGroup.type"
+            (ngModelChange)="onChangeGroup(noteGroup)"
+            placeholder="noteGroupType"
+            required
+          >
+            <option
+              *ngFor="let noteGroupType of noteGroupTypes"
+              [value]="noteGroupType"
+            >
+              {{ noteGroupType }}
+            </option>
+          </select>
         </div>
         <div class="flex items-center gap-2">
-          <div>
-            <button
-              class="border-primary-contrast"
-              (click)="$event.stopPropagation(); copyToClipboard(note.content)"
-            >
-              copy
-            </button>
-          </div>
-          <div>
-            <button
-              class="px-4"
-              (click)="
-                $event.stopPropagation();
-                $event.preventDefault();
-                removeNote(noteGroup.id, note)
-              "
-            >
-              x
-            </button>
-          </div>
+          <a class="button block" [routerLink]="['/notes', 'add', noteGroup.id]"
+            >+ note</a
+          >
         </div>
       </div>
-    </a>
+    </form>
+    <div class="flex flex-col gap-2 h-full overflow-auto">
+      <a
+        class="border py-1 px-3"
+        *ngFor="let note of noteGroup.notes; trackBy: trackByFn"
+        [routerLink]="['.', note.id]"
+      >
+        <div class="flex gap-4">
+          <div class="flex items-center gap-2" *ngIf="noteGroup.toggle">
+            <input
+              type="checkbox"
+              name="groupToogle"
+              id="groupToogle"
+              class="w-10 h-10"
+              [(ngModel)]="note.check"
+              (ngModelChange)="onChangeNote(noteGroup, note)"
+              (click)="$event.stopPropagation()"
+            />
+          </div>
+          <div class="grow flex flex-col">
+            <b class="text-accent">{{ note.title }}</b>
+            <div>{{ note.content }}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div>
+              <button
+                class="border-primary-contrast"
+                (click)="
+                  $event.stopPropagation();
+                  copyToClipboard(note.content || note.title)
+                "
+              >
+                copy
+              </button>
+            </div>
+            <div>
+              <button
+                class="px-4"
+                (click)="
+                  $event.stopPropagation();
+                  $event.preventDefault();
+                  removeNote(noteGroup.id, note)
+                "
+              >
+                x
+              </button>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <hr class="mt-4 mb-4" />
+
+    <form
+      class="flex flex-col gap-4"
+      (submit)="addNote()"
+      #noteAddForm="ngForm"
+    >
+      <div>
+        <input
+          class="text-primary"
+          type="title"
+          name="title"
+          id="title"
+          [(ngModel)]="newNoteModel.title"
+          placeholder="Título"
+          required
+        />
+      </div>
+      <div class="flex justify-end">
+        <button
+          [disabled]="
+            noteAddForm.invalid === true || (waitingCreation$ | async)
+          "
+        >
+          {{ (waitingCreation$ | async) ? "Criando..." : "Criar" }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

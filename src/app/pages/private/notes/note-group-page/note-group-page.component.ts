@@ -1,11 +1,15 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from "@angular/common";
+import { AsyncPipe, NgFor, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterModule } from "@angular/router";
-import { BadgeComponent } from "@components/ui/badge/badge.component";
 import { NoteService } from "@services/note/note.service";
-import { INote, INoteGroup } from "@services/note/note.types";
-import { BehaviorSubject, ReplaySubject } from "rxjs";
+import {
+  INote,
+  INoteGroup,
+  NOTE_GROUP_TYPE,
+  NOTE_STATUS,
+} from "@services/note/note.types";
+import { BehaviorSubject, firstValueFrom, ReplaySubject } from "rxjs";
 
 @Component({
   selector: "app-note-group-page",
@@ -16,8 +20,6 @@ import { BehaviorSubject, ReplaySubject } from "rxjs";
     NgFor,
     NgIf,
     RouterModule,
-    BadgeComponent,
-    NgClass,
     FormsModule,
   ],
   templateUrl: "./note-group-page.component.html",
@@ -32,12 +34,50 @@ export class NoteGroupPageComponent {
 
   loading$ = new ReplaySubject<boolean>(1);
 
+  showNewItemForm$ = new ReplaySubject<boolean>(1);
+
+  noteGroupType = NOTE_GROUP_TYPE;
+
+  noteGroupTypes = Object.values(NOTE_GROUP_TYPE);
+
+  newNoteModel = {
+    title: "",
+  };
+
+  waitingCreation$ = new ReplaySubject<boolean>(1);
+
   constructor() {
     this.loadNoteGroup();
   }
 
+  trackByFn(_index: number, item: INote) {
+    return item.id;
+  }
+
   copyToClipboard(content: string) {
     navigator.clipboard.writeText(content);
+  }
+
+  async addNote() {
+    this.waitingCreation$.next(true);
+
+    const group = await firstValueFrom(this.noteGroup$);
+    const { error, note } = await this.noteService.add(group?.id!, {
+      title: this.newNoteModel.title,
+      status: NOTE_STATUS.PENDING,
+      created: Date.now(),
+      updated: Date.now(),
+    });
+
+    if (note) {
+      this.newNoteModel.title = "";
+      this.loadNoteGroup();
+    } else {
+      alert("Error adding note!!!");
+      console.log("Error adding note", error.code, error.message);
+    }
+
+    this.waitingCreation$.next(false);
   }
 
   private async loadNoteGroup() {

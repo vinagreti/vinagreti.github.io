@@ -36,6 +36,8 @@ export class NoteGroupAddPageComponent {
       title: this.title,
       type: this.noteGroupType,
       dueDate: this.dueDate,
+      created: Date.now(),
+      updated: Date.now(),
     });
     if (noteGroup) {
       this.router.navigate(["/notes", noteGroup.id]);
