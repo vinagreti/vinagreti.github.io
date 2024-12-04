@@ -1,0 +1,56 @@
+<div class="flex flex-col gap-4 h-full">
+  <h1>New investment</h1>
+
+  <form class="flex flex-col gap-4" #form="ngForm" (submit)="addNewItem()">
+    <div>
+      <input
+        class="text-primary"
+        type="title"
+        name="title"
+        id="title"
+        [(ngModel)]="formData.title"
+        placeholder="title"
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        class="text-primary"
+        type="value"
+        name="value"
+        id="value"
+        [(ngModel)]="formData.value"
+        placeholder="value"
+      />
+    </div>
+
+    <div>
+      <input
+        class="text-primary"
+        type="date"
+        name="startDate"
+        id="startDate"
+        [(ngModel)]="formData.startDate"
+        placeholder="startDate"
+      />
+    </div>
+
+    <div>
+      <input
+        class="text-primary"
+        type="date"
+        name="dueDate"
+        id="dueDate"
+        [(ngModel)]="formData.dueDate"
+        placeholder="dueDate"
+      />
+    </div>
+
+    <div>
+      <button [disabled]="form.invalid === true || (waitingCreation$ | async)">
+        {{ (waitingCreation$ | async) ? "Criando..." : "Criar" }}
+      </button>
+    </div>
+  </form>
+</div>

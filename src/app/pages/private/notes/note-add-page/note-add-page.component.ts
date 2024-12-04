@@ -72,7 +72,6 @@ export class NoteAddPageComponent {
     });
 
     if (note) {
-      await this.router.navigate(["/notes", this.noteGroup]);
       this.router.navigate(["/notes", this.noteGroup]);
     } else {
       alert("Error adding note!!!");

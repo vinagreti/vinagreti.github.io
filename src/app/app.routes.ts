@@ -60,4 +60,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import("./pages/public/tools/tools-page.routes").then((r) => r.routes),
   },
+  {
+    path: "investment",
+    loadChildren: () =>
+      import("./pages/private/investment/investment-pages.routes").then((r) =>
+        r.routes
+      ),
+  },
 ];

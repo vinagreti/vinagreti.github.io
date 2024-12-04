@@ -1,0 +1,39 @@
+<div class="flex flex-col gap-6">
+  <div>
+    <a class="button" [routerLink]="['/investment']"><- Back</a>
+  </div>
+  <ng-container *ngIf="investment$ | async as investment">
+    <h1>{{ investment.title }}</h1>
+    <div>
+      <label for="value">Value:</label>
+      <div id="value">{{ investment.value }}</div>
+    </div>
+    <div>
+      <label for="startDate">Start date:</label>
+      <div id="startDate">{{ investment.startDate }}</div>
+    </div>
+    <div>
+      <label for="dueDate">Due date:</label>
+      <div id="dueDate">{{ investment.dueDate }}</div>
+    </div>
+
+    <h2>Posição diária</h2>
+    <div class="flex flex-col gap-2 h-full overflow-auto">
+      <a
+        class="border py-1 px-3"
+        *ngFor="
+          let dailyPosition of investment.dailyPosition;
+          trackBy: trackByFn
+        "
+        [routerLink]="['.', dailyPosition.id]"
+      >
+        <div class="flex gap-4">
+          <div class="grow flex flex-col">
+            <b class="text-accent">{{ dailyPosition.value }}</b>
+            <div>{{ dailyPosition.grossValue }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</div>

@@ -1,7 +1,6 @@
 import { AsyncPipe, NgFor } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { BadgeComponent } from "@components/ui/badge/badge.component";
 import { NoteService } from "@services/note/note.service";
 import { INoteGroup } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
@@ -10,7 +9,7 @@ import { BehaviorSubject } from "rxjs";
   selector: "app-notes-page",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, AsyncPipe, RouterLink, BadgeComponent],
+  imports: [NgFor, AsyncPipe, RouterLink],
   templateUrl: "./notes-page.component.html",
   styleUrl: "./notes-page.component.scss",
 })
