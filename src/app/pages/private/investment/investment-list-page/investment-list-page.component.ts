@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from "@angular/common";
+import { AsyncPipe, CurrencyPipe, DatePipe, NgFor } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { InvestmentService } from "@services/investment/investment.service";
@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs";
 @Component({
   selector: "app-investment-list-page",
   standalone: true,
-  imports: [RouterLink, AsyncPipe, NgFor],
+  imports: [RouterLink, AsyncPipe, NgFor, DatePipe, CurrencyPipe],
   templateUrl: "./investment-list-page.component.html",
   styleUrl: "./investment-list-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

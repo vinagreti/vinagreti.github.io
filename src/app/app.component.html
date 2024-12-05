@@ -14,6 +14,24 @@
         <img src="images/foto.png" alt="" class="w-16 rounded-full" />
         Bruno João
       </a>
+      <div>
+        <app-dropdown>
+          <div class="flex flex-col gap-1">
+            <a routerLink="/notes">Notes</a>
+            <a routerLink="/tools">Tools</a>
+            <a routerLink="/investment">Investments</a>
+            <a routerLink="/projects">Projects</a>
+            <a routerLink="/resume">Resume</a>
+            <a routerLink="/contact">Contact</a>
+            <a routerLink="/login" *ngIf="!(user$ | async)">
+              <app-icon icon="person" class="text-highlight"></app-icon>
+            </a>
+            <button (click)="signOut()">
+              <app-icon icon="person" class=""></app-icon>
+            </button>
+          </div>
+        </app-dropdown>
+      </div>
       <div
         *ngIf="user$ | async"
         class="flex flex-row items-center gap-4 justify-center md:justify-end flex-grow"

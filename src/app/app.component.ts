@@ -5,6 +5,7 @@ import { IconComponent } from "@components/ui/icon/icon.component";
 import { TemplateService } from "@services/template/template.service";
 import { UserService } from "@services/user/user.service";
 import { CoreModule } from "./core/core.module";
+import { DropdownComponent } from "@components/ui/dropdown/dropdown.component";
 
 @Component({
   selector: "app-root",
@@ -17,6 +18,7 @@ import { CoreModule } from "./core/core.module";
     AsyncPipe,
     NgIf,
     IconComponent,
+    DropdownComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",

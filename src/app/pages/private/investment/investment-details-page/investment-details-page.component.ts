@@ -1,5 +1,4 @@
 import {
-  AsyncPipe,
   CurrencyPipe,
   DatePipe,
   DecimalPipe,
@@ -28,7 +27,6 @@ import { firstValueFrom, map } from "rxjs";
   standalone: true,
   imports: [
     NgIf,
-    AsyncPipe,
     RouterModule,
     RouterLink,
     NgFor,
@@ -59,6 +57,10 @@ export class InvestmentDetailsPageComponent {
     const newChartData = this.generateChartDataBasedOnInvestmentDailyPosition();
     return newChartData;
   });
+
+  private charType: Plotly.PlotData["type"] = "scatter";
+
+  private charMode: Plotly.PlotData["mode"] = "gauge+number+delta";
 
   constructor() {
     this.loadInvestment();
@@ -116,8 +118,8 @@ export class InvestmentDetailsPageComponent {
       {
         x: [] as any[],
         y: [] as any[],
-        type: "scatter",
-        mode: "lines+points" as any,
+        type: this.charType,
+        mode: this.charMode,
         marker: { color },
         name,
       },
@@ -137,8 +139,8 @@ export class InvestmentDetailsPageComponent {
       {
         x: [] as any[],
         y: [] as any[],
-        type: "scatter",
-        mode: "lines+points" as any,
+        type: this.charType,
+        mode: this.charMode,
         marker: { color: "blue" },
         name: "Valor Inicial",
       },

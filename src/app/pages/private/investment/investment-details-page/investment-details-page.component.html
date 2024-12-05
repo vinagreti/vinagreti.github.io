@@ -1,19 +1,20 @@
 <div class="flex flex-col gap-6">
-  <div>
-    <a class="button" [routerLink]="['/investment']"><- Back</a>
+  <div class="flex gap4 justify-between">
+    <div>
+      <a class="button" [routerLink]="['/investment']"><- Back</a>
+    </div>
+    <div>
+      <a class="button" [routerLink]="['.', 'position-add']">
+        + Daily Position
+      </a>
+    </div>
   </div>
   <ng-container *ngIf="investment() as investment">
     <div class="flex gap4 justify-between">
       <h1>{{ investment.title }}</h1>
-
-      <div>
-        <a class="button" [routerLink]="['.', 'position-add']">
-          Add daily position
-        </a>
-      </div>
     </div>
 
-    <div class="flex gap-4">
+    <div class="flex flex-col">
       <div class="flex gap-1">
         <label for="value">Value:</label>
         <div id="value" class="text-accent">
@@ -21,24 +22,14 @@
         </div>
       </div>
       <div class="flex gap-1">
-        <label for="startDate">Start date:</label>
+        <label for="startDate">Dates:</label>
         <div id="startDate" class="text-accent">
-          {{ investment.startDate | date }}
-        </div>
-      </div>
-      <div class="flex gap-1">
-        <label for="dueDate">Due date:</label>
-        <div id="dueDate" class="text-accent">
-          {{ investment.dueDate | date }}
-        </div>
-      </div>
-      <div class="flex gap-1">
-        <label for="dueDate">Days left</label>
-        <div id="dueDate" class="text-accent">
-          {{
+          {{ investment.startDate | date }} -
+          {{ investment.dueDate | date }} ({{
             (investment.dueDate - todayDateTime) / (60e3 * 60 * 24)
               | number : ".0-0"
           }}
+          days left)
         </div>
       </div>
     </div>
@@ -61,24 +52,24 @@
             <div class="text-accent">{{ dailyPosition.date | date }}</div>
 
             <div class="flex gap-4">
-              <div class="flex gap-4">
-                <div class="flex gap-4">
+              <div class="flex flex-wrap gap-4">
+                <div class="flex gap-1">
                   Bruto:
                   <span class="text-accent">
                     {{ dailyPosition.grossValue | currency : "BRL" }}
                   </span>
                 </div>
               </div>
-              <div class="flex gap-4">
-                <div class="flex gap-4">
+              <div class="flex flex-wrap gap-4">
+                <div class="flex gap-1">
                   Líquido:
                   <span class="text-accent">
                     {{ dailyPosition.netValue | currency : "BRL" }}
                   </span>
                 </div>
               </div>
-              <div class="flex gap-4">
-                <div class="flex gap-4">
+              <div class="flex flex-wrap gap-4">
+                <div class="flex gap-1">
                   Lucro:
                   <span class="text-accent">
                     {{
@@ -93,8 +84,8 @@
                 </div>
               </div>
 
-              <div class="flex gap-4">
-                <div class="flex gap-4">
+              <div class="flex flex-wrap gap-4">
+                <div class="flex gap-1">
                   IR:
                   <span class="text-accent">
                     {{ dailyPosition.IR | currency : "BRL" }} ({{

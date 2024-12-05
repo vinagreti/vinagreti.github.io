@@ -20,8 +20,10 @@
           <b class="text-accent">
             {{ investment.title }}
           </b>
-          <div>{{ investment.value }}</div>
-          <div>{{ investment.startDate }} - {{ investment.dueDate }}</div>
+          <small>{{ investment.value | currency : "BRL" }}</small>
+          <small>
+            {{ investment.startDate | date }} - {{ investment.dueDate | date }}
+          </small>
         </div>
 
         <div class="flex items-center gap-2">
