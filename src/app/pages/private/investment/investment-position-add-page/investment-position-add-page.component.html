@@ -1,6 +1,18 @@
-<div>
-  <textarea name="" id="" [(ngModel)]="raw" (ngModelChange)="parse()">
-  </textarea>
+<div class="flex flex-col gap-4">
+  <div class="flex gap4 justify-between">
+    <div>
+      <a class="button" [routerLink]="['/investment', investmentId]"><- Back</a>
+    </div>
+  </div>
+
+  <h1>Add daily position</h1>
+
+  <textarea
+    name=""
+    id=""
+    [(ngModel)]="raw"
+    (ngModelChange)="parse()"
+  ></textarea>
 
   <div *ngIf="!!parsed">
     Result:
