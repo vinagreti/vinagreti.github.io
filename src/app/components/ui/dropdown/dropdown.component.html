@@ -1,7 +1,15 @@
 <div class="dropdown">
-  <button id="dropdown" (click)="toggleMenu()">Dropdown</button>
-  <div class="content" [hidden]="isMenuClosed()">
-    asdfasdf
+  <button id="dropdown" [id]="buttonUid" (click)="toggleMenu()">
+    {{ title() }}
+  </button>
+  <div
+    class="content"
+    [hidden]="isMenuClosed()"
+    [ngStyle]="{
+    left: avoidOverflowLeft() && '0px',
+    right: avoidOverflowRight() && '0px',
+  }"
+  >
     <ng-content></ng-content>
   </div>
 </div>
