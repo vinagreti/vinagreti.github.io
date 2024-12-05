@@ -1,4 +1,4 @@
-import { DatePipe } from "@angular/common";
+import { DatePipe, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
@@ -9,7 +9,7 @@ import { ReplaySubject } from "rxjs";
 @Component({
   selector: "app-investment-position-add-page",
   standalone: true,
-  imports: [FormsModule, RouterModule, DatePipe],
+  imports: [FormsModule, RouterModule, DatePipe, NgIf],
   templateUrl: "./investment-position-add-page.component.html",
   styleUrl: "./investment-position-add-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,13 +19,7 @@ export class InvestmentPositionAddPageComponent {
 
   raw: string = "";
 
-  parsed: Omit<IInvestmentDailyPosition, "id"> = {
-    grossValue: 0,
-    IOF: 0,
-    IR: 0,
-    netValue: 0,
-    date: 0,
-  };
+  parsed: Omit<IInvestmentDailyPosition, "id"> | null = null;
 
   waitingCreation$ = new ReplaySubject<boolean>(1);
 
@@ -36,7 +30,10 @@ export class InvestmentPositionAddPageComponent {
   private router = inject(Router);
 
   parse() {
-    const parts = this.raw.replaceAll(".", "").replaceAll(",", ".").split(" ");
+    const sanitized = this.raw.replaceAll("\n", " ").replaceAll("  ", " ")
+      .replaceAll(".", "")
+      .replaceAll(",", ".");
+    const parts = sanitized.split(" ");
     this.parsed = {
       IOF: parseFloat(parts[11]),
       IR: parseFloat(parts[23]),
@@ -51,11 +48,11 @@ export class InvestmentPositionAddPageComponent {
 
     const { error, item } = await this.investmentService.addDailyPosition(
       this.investmentId,
-      this.parsed,
+      this.parsed!,
     );
 
     if (item) {
-      this.router.navigate(["/investments", this.investmentId]);
+      this.router.navigate(["/investment", this.investmentId]);
     } else {
       alert("Error adding investment!!!");
       console.log("Error adding investment", error.code, error.message);

@@ -2,7 +2,7 @@
   <textarea name="" id="" [(ngModel)]="raw" (ngModelChange)="parse()">
   </textarea>
 
-  <div>
+  <div *ngIf="!!parsed">
     Result:
     <div class="flex gap-4">
       <label for="netValue">netValue</label>

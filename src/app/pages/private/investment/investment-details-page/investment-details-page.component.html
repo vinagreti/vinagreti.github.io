@@ -3,24 +3,44 @@
     <a class="button" [routerLink]="['/investment']"><- Back</a>
   </div>
   <ng-container *ngIf="investment$ | async as investment">
-    <div>
+    <div class="flex gap4 justify-between">
       <h1>{{ investment.title }}</h1>
 
       <div>
-        <a [routerLink]="['.', 'position-add']"> Add daily position </a>
+        <a class="button" [routerLink]="['.', 'position-add']">
+          Add daily position
+        </a>
       </div>
     </div>
-    <div>
-      <label for="value">Value:</label>
-      <div id="value">{{ investment.value }}</div>
-    </div>
-    <div>
-      <label for="startDate">Start date:</label>
-      <div id="startDate">{{ investment.startDate }}</div>
-    </div>
-    <div>
-      <label for="dueDate">Due date:</label>
-      <div id="dueDate">{{ investment.dueDate }}</div>
+
+    <div class="flex gap-4">
+      <div class="flex gap-1">
+        <label for="value">Value:</label>
+        <div id="value" class="text-accent">
+          {{ investment.value | currency : "BRL" }}
+        </div>
+      </div>
+      <div class="flex gap-1">
+        <label for="startDate">Start date:</label>
+        <div id="startDate" class="text-accent">
+          {{ investment.startDate | date }}
+        </div>
+      </div>
+      <div class="flex gap-1">
+        <label for="dueDate">Due date:</label>
+        <div id="dueDate" class="text-accent">
+          {{ investment.dueDate | date }}
+        </div>
+      </div>
+      <div class="flex gap-1">
+        <label for="dueDate">Days left</label>
+        <div id="dueDate" class="text-accent">
+          {{
+            (investment.dueDate - todayDateTime) / (60e3 * 60 * 24)
+              | number : ".0-0"
+          }}
+        </div>
+      </div>
     </div>
 
     <h2>Posição diária</h2>
@@ -35,11 +55,71 @@
       >
         <div class="flex gap-4">
           <div class="grow flex flex-col">
-            <b class="text-accent">{{ dailyPosition.grossValue }}</b>
-            <div>{{ dailyPosition.grossValue }}</div>
+            <div class="text-accent">{{ dailyPosition.date | date }}</div>
+
+            <div class="flex gap-4">
+              <div class="flex gap-4">
+                <div class="flex gap-4">
+                  Bruto:
+                  <span class="text-accent">
+                    {{ dailyPosition.grossValue | currency : "BRL" }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex gap-4">
+                  Líquido:
+                  <span class="text-accent">
+                    {{ dailyPosition.netValue | currency : "BRL" }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex gap-4">
+                  IR:
+                  <span class="text-accent">
+                    {{ dailyPosition.IR | currency : "BRL" }} ({{
+                      dailyPosition.IR / dailyPosition.netValue
+                        | percent : ".1-3"
+                    }})
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex gap-4">
+                  IOF:
+                  <span class="text-accent">
+                    {{ dailyPosition.IOF | currency : "BRL" }} ({{
+                      dailyPosition.IOF /
+                        (dailyPosition.grossValue - investment.value)
+                        | percent : ".1-3"
+                    }})
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex gap-4">
+                  Lucro:
+                  <span class="text-accent">
+                    {{
+                      dailyPosition.netValue - investment.value
+                        | currency : "BRL"
+                    }}
+                    ({{
+                      (dailyPosition.netValue - investment.value) /
+                        investment.value | percent : ".1-3"
+                    }})
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </a>
+    </div>
+
+    <div class="border border-accent h-80">
+      <app-chart></app-chart>
     </div>
   </ng-container>
 </div>

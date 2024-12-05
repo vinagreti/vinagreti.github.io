@@ -69,7 +69,7 @@
               class="w-10 h-10"
               [(ngModel)]="note.check"
               (ngModelChange)="onChangeNote(noteGroup, note)"
-              (click)="$event.stopPropagation()"
+              (click)="$event.stopPropagation(); $event.preventDefault()"
             />
           </div>
           <div class="grow flex flex-col">
@@ -82,6 +82,7 @@
                 class="border-primary-contrast"
                 (click)="
                   $event.stopPropagation();
+                  $event.preventDefault();
                   copyToClipboard(note.content || note.title)
                 "
               >
@@ -93,6 +94,7 @@
                 class="px-4"
                 (click)="
                   $event.stopPropagation();
+                  $event.preventDefault();
                   $event.preventDefault();
                   removeNote(noteGroup.id, note)
                 "

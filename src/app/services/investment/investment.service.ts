@@ -70,13 +70,13 @@ export class InvestmentService {
     );
     const selectionQuery = query(
       dailyPositionCollection,
-      orderBy("updated", "desc"),
+      orderBy("date", "desc"),
     );
     const dailyPositionSnapshot = await getDocs(selectionQuery);
-    const dailyPosition = dailyPositionSnapshot.docs.map((noteRef) => {
+    const dailyPosition = dailyPositionSnapshot.docs.map((dailyPositionRef) => {
       return {
-        ...noteRef.data(),
-        id: noteRef.id,
+        ...dailyPositionRef.data(),
+        id: dailyPositionRef.id,
       } as IInvestmentDailyPosition;
     });
     const item = {
