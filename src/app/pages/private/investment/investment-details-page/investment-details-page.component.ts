@@ -1,14 +1,17 @@
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe, NgFor, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { ActivatedRoute, RouterModule } from "@angular/router";
+import { ActivatedRoute, RouterLink, RouterModule } from "@angular/router";
 import { InvestmentService } from "@services/investment/investment.service";
-import { IInvestment } from "@services/investment/investment.types";
+import {
+  IInvestment,
+  IInvestmentDailyPosition,
+} from "@services/investment/investment.types";
 import { BehaviorSubject, firstValueFrom, map } from "rxjs";
 
 @Component({
   selector: "app-investment-details-page",
   standalone: true,
-  imports: [NgIf, AsyncPipe, RouterModule],
+  imports: [NgIf, AsyncPipe, RouterModule, RouterLink, NgFor],
   templateUrl: "./investment-details-page.component.html",
   styleUrl: "./investment-details-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,7 +31,8 @@ export class InvestmentDetailsPageComponent {
     this.loadInvestment();
   }
 
-  trackByFn(_index: number, item: IInvestment) {
+  trackByFn(_index: number, item: IInvestmentDailyPosition) {
+    console.group(">>>>>>>>>>> item", item);
     return item.id;
   }
 

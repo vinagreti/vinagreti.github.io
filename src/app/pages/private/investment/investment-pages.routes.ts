@@ -19,7 +19,7 @@ export const routes: Routes = [
         component: InvestmentAddPageComponent,
       },
       {
-        path: "position/add",
+        path: ":investmentId/position-add",
         component: InvestmentPositionAddPageComponent,
       },
       {

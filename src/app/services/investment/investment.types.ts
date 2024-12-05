@@ -16,9 +16,10 @@ export type IInvestment = {
 };
 
 export type IInvestmentDailyPosition = {
-  rentability: number;
+  id: string;
   netValue: number;
   IOF: number;
   IR: number;
   grossValue: number;
+  date: number;
 };

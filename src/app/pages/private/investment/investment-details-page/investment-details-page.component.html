@@ -3,7 +3,13 @@
     <a class="button" [routerLink]="['/investment']"><- Back</a>
   </div>
   <ng-container *ngIf="investment$ | async as investment">
-    <h1>{{ investment.title }}</h1>
+    <div>
+      <h1>{{ investment.title }}</h1>
+
+      <div>
+        <a [routerLink]="['.', 'position-add']"> Add daily position </a>
+      </div>
+    </div>
     <div>
       <label for="value">Value:</label>
       <div id="value">{{ investment.value }}</div>
@@ -29,7 +35,7 @@
       >
         <div class="flex gap-4">
           <div class="grow flex flex-col">
-            <b class="text-accent">{{ dailyPosition.value }}</b>
+            <b class="text-accent">{{ dailyPosition.grossValue }}</b>
             <div>{{ dailyPosition.grossValue }}</div>
           </div>
         </div>

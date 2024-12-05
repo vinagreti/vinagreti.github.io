@@ -1,7 +1,13 @@
 import { inject, Injectable } from "@angular/core";
 import { FirebaseService } from "@services/firebase/firebase.service";
-import { IInvestment } from "./investment.types";
-import { deleteDoc } from "firebase/firestore/lite";
+import { IInvestment, IInvestmentDailyPosition } from "./investment.types";
+import {
+  collection,
+  deleteDoc,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore/lite";
 
 @Injectable({
   providedIn: "root",
@@ -58,6 +64,50 @@ export class InvestmentService {
       "investment",
       investmentId,
     );
-    return investment;
+    const dailyPositionCollection = collection(
+      investment.snapshot.ref,
+      "dailyPosition",
+    );
+    const selectionQuery = query(
+      dailyPositionCollection,
+      orderBy("updated", "desc"),
+    );
+    const dailyPositionSnapshot = await getDocs(selectionQuery);
+    const dailyPosition = dailyPositionSnapshot.docs.map((noteRef) => {
+      return {
+        ...noteRef.data(),
+        id: noteRef.id,
+      } as IInvestmentDailyPosition;
+    });
+    const item = {
+      ...investment.item,
+      dailyPosition,
+    } as IInvestment;
+    return { snapshot: investment.snapshot, item };
+  }
+
+  async addDailyPosition(
+    investmentId: string,
+    doc: Omit<IInvestmentDailyPosition, "id">,
+  ): Promise<{ item?: IInvestmentDailyPosition; error?: any }> {
+    const investment = await this.firebaseService.get<IInvestment>(
+      "investment",
+      investmentId,
+    );
+    const investmentCollection = collection(
+      investment.snapshot.ref,
+      "dailyPosition",
+    );
+    return this.firebaseService.add<IInvestmentDailyPosition>(
+      investmentCollection,
+      doc,
+    )
+      .then((investment) => {
+        const item = investment.item;
+        return { item };
+      })
+      .catch((error) => {
+        return Promise.resolve({ error });
+      });
   }
 }

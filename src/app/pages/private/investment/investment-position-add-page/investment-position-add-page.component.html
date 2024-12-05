@@ -1,1 +1,32 @@
-<p>investment-position-add-page works!</p>
+<div>
+  <textarea name="" id="" [(ngModel)]="raw" (ngModelChange)="parse()">
+  </textarea>
+
+  <div>
+    Result:
+    <div class="flex gap-4">
+      <label for="netValue">netValue</label>
+      <div id="netValue">{{ parsed.netValue }}</div>
+    </div>
+    <div class="flex gap-4">
+      <label for="IOF">IOF</label>
+      <div id="IOF">{{ parsed.IOF }}</div>
+    </div>
+    <div class="flex gap-4">
+      <label for="IR">IR</label>
+      <div id="IR">{{ parsed.IR }}</div>
+    </div>
+    <div class="flex gap-4">
+      <label for="grossValue">grossValue</label>
+      <div id="grossValue">{{ parsed.grossValue }}</div>
+    </div>
+    <div class="flex gap-4">
+      <label for="date">date</label>
+      <div id="date">{{ parsed.date | date }}</div>
+    </div>
+  </div>
+
+  <div>
+    <button (click)="add()">Add</button>
+  </div>
+</div>
