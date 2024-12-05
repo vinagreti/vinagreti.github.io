@@ -87,12 +87,12 @@ export class InvestmentDetailsPageComponent {
     const grossPlotdata = this.getPlotDataByPropertyAndDate(
       "grossValue",
       "orange",
-      "Atual Bruto",
+      "Gross",
     );
     const netPlotdata = this.getPlotDataByPropertyAndDate(
       "netValue",
       "green",
-      "Atual Líquido",
+      "Net",
     );
 
     const plotData: Partial<Plotly.PlotData>[] = [
@@ -142,7 +142,7 @@ export class InvestmentDetailsPageComponent {
         type: this.charType,
         mode: this.charMode,
         marker: { color: "blue" },
-        name: "Valor Inicial",
+        name: "Initial",
       },
     );
     return plotData;

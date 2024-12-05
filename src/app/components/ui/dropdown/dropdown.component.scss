@@ -2,21 +2,8 @@
   position: relative;
   display: inline-block;
 
-  button {
-    background-color: #3498db;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background-color: #2980b9;
-    }
-  }
-
   .content {
+    padding-top: 3px;
     position: absolute;
     min-width: 20px;
     overflow: auto;
