@@ -1,10 +1,17 @@
 <div class="flex flex-col gap-4">
+  <div class="flex gap4 justify-between">
+    <div>
+      <a class="button" [routerLink]="['/']"><- Back</a>
+    </div>
+  </div>
+
   <h1>Tools</h1>
 
-  <div class="flex flex-col">
-    <a [routerLink]="['.', 'compound-interest']" class="border py-1 px-3"
+  <div class="flex flex-col gap-4">
+    <a [routerLink]="['.', 'paid-interest']" class="button">Paid interest</a>
+    <a [routerLink]="['.', 'compound-interest']" class="button"
       >Compound interest</a
     >
-    <a [routerLink]="['.', 'snake']" class="border py-1 px-3">Snake</a>
+    <a [routerLink]="['.', 'snake']" class="button">Snake</a>
   </div>
 </div>

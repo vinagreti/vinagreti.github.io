@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-4">
+  <div class="flex gap4 justify-between">
+    <div>
+      <a class="button" [routerLink]="[backTo()]"><- Back</a>
+    </div>
+  </div>
+
+  <h1>{{ title() }}</h1>
+
+  <div class="flex flex-col gap-4">
+    <ng-content></ng-content>
+  </div>
+</div>

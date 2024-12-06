@@ -1,0 +1,44 @@
+<app-page-wrapper title="Paid Interest">
+  <form class="flex flex-col gap-4" #form="ngForm">
+    <div class="flex gap-2 items-center">
+      <label for="initial" class="w-20">Initial</label>
+      <input
+        [required]="true"
+        class="grow"
+        type="numeric"
+        name="initial"
+        [(ngModel)]="formData.initial"
+        placeholder="Initial"
+      />
+    </div>
+
+    <div class="flex gap-2 items-center">
+      <label for="final" class="w-20">Final</label>
+      <input
+        [required]="true"
+        class="grow"
+        type="numeric"
+        name="final"
+        [(ngModel)]="formData.final"
+        placeholder="Final"
+      />
+    </div>
+
+    <div class="flex gap-2 items-center">
+      <label for="times" class="w-20">Times</label>
+      <input
+        [required]="true"
+        class="grow"
+        type="numeric"
+        name="times"
+        [(ngModel)]="formData.times"
+        placeholder="Times"
+      />
+    </div>
+
+    <div>
+      <h3>Interest</h3>
+      <b class="text-accent">{{ resul() | percent }}</b>
+    </div>
+  </form>
+</app-page-wrapper>
