@@ -1,3 +1,4 @@
+import { InterestService } from "@services/interest/interest.service";
 import {
   CurrencyPipe,
   DatePipe,
@@ -10,6 +11,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
   signal,
 } from "@angular/core";
@@ -45,7 +47,13 @@ export class InvestmentDetailsPageComponent {
 
   investment = signal<IInvestment | null>(null);
 
+  grossInterestAverage = signal<number | null>(null);
+
+  netInterestAverage = signal<number | null>(null);
+
   route = inject(ActivatedRoute);
+
+  interestService = inject(InterestService);
 
   investmentId$ = this.route.params.pipe(
     map((params) => params["investmentId"]),
@@ -64,6 +72,13 @@ export class InvestmentDetailsPageComponent {
 
   constructor() {
     this.loadInvestment();
+
+    effect(() => {
+      const investment = this.investment();
+      if (investment) {
+        this.calcInterestAverage(investment);
+      }
+    }, { allowSignalWrites: true });
   }
 
   trackByFn(_index: number, item: IInvestmentDailyPosition) {
@@ -76,10 +91,6 @@ export class InvestmentDetailsPageComponent {
     if (investmentRef.item) {
       this.investment.set(investmentRef.item);
     }
-  }
-
-  private mountChartData() {
-    const chartData = [];
   }
 
   private generateChartDataBasedOnInvestmentDailyPosition() {
@@ -146,5 +157,24 @@ export class InvestmentDetailsPageComponent {
       },
     );
     return plotData;
+  }
+
+  private calcInterestAverage(investment: IInvestment) {
+    const today = Date.now();
+    const initialDate = investment.startDate;
+    const monthInMiliseconds = 60e3 * 60 * 24 * 30;
+    const diff = today - initialDate;
+    const times = diff / monthInMiliseconds;
+    const lastDailyPosition: IInvestmentDailyPosition =
+      investment.dailyPosition![0];
+    const finalGross = lastDailyPosition.grossValue;
+    const finalNet = lastDailyPosition.netValue;
+    const initial = investment.value;
+    const grossInterestAverage = this.interestService
+      .interestByInitialFinalAndTimes(initial, finalGross, times);
+    const netInterestAverage = this.interestService
+      .interestByInitialFinalAndTimes(initial, finalNet, times);
+    this.grossInterestAverage.set(grossInterestAverage);
+    this.netInterestAverage.set(netInterestAverage);
   }
 }
