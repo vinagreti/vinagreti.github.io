@@ -11,7 +11,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   inject,
   signal,
 } from "@angular/core";
@@ -47,10 +46,6 @@ export class InvestmentDetailsPageComponent {
 
   investment = signal<IInvestment | null>(null);
 
-  grossInterestAverage = signal<number | null>(null);
-
-  netInterestAverage = signal<number | null>(null);
-
   route = inject(ActivatedRoute);
 
   interestService = inject(InterestService);
@@ -66,19 +61,46 @@ export class InvestmentDetailsPageComponent {
     return newChartData;
   });
 
+  averages = computed(() => {
+    const investment = this.investment();
+    if (investment) {
+      return this.calcInterestAverage(investment);
+    } else {
+      return { gross: null, net: null };
+    }
+  });
+
+  fees = computed(() => {
+    const investment = this.investment();
+    if (investment) {
+      return this.calcFees(investment);
+    } else {
+      return { fees: null, feesPercentage: null };
+    }
+  });
+
+  totals = computed(() => {
+    const investment = this.investment();
+    if (investment) {
+      return this.calcTotals(investment);
+    } else {
+      return {
+        gross: null,
+        grossPercentage: null,
+        grossValue: null,
+        net: null,
+        netPercentage: null,
+        netValue: null,
+      };
+    }
+  });
+
   private charType: Plotly.PlotData["type"] = "scatter";
 
   private charMode: Plotly.PlotData["mode"] = "gauge+number+delta";
 
   constructor() {
     this.loadInvestment();
-
-    effect(() => {
-      const investment = this.investment();
-      if (investment) {
-        this.calcInterestAverage(investment);
-      }
-    }, { allowSignalWrites: true });
   }
 
   trackByFn(_index: number, item: IInvestmentDailyPosition) {
@@ -107,9 +129,9 @@ export class InvestmentDetailsPageComponent {
     );
 
     const plotData: Partial<Plotly.PlotData>[] = [
+      valuePlotData,
       grossPlotdata,
       netPlotdata,
-      valuePlotData,
     ];
     return plotData;
   }
@@ -121,7 +143,7 @@ export class InvestmentDetailsPageComponent {
   ) {
     const dailyPosition = this.investment()?.dailyPosition || [];
     const plotData: Partial<Plotly.PlotData> = dailyPosition.reduce(
-      (acc, item, index) => {
+      (acc, item) => {
         acc.y.push(item[prop]);
         acc.x.push(new Date(item.date));
         return acc;
@@ -142,7 +164,7 @@ export class InvestmentDetailsPageComponent {
     const investment = this.investment();
     const dailyPosition = this.investment()?.dailyPosition || [];
     const plotData: Partial<Plotly.PlotData> = dailyPosition.reduce(
-      (acc, item, index) => {
+      (acc, item) => {
         acc.y.push(investment?.value);
         acc.x.push(new Date(item.date));
         return acc;
@@ -170,11 +192,33 @@ export class InvestmentDetailsPageComponent {
     const finalGross = lastDailyPosition.grossValue;
     const finalNet = lastDailyPosition.netValue;
     const initial = investment.value;
-    const grossInterestAverage = this.interestService
+    const gross = this.interestService
       .interestByInitialFinalAndTimes(initial, finalGross, times);
-    const netInterestAverage = this.interestService
+    const net = this.interestService
       .interestByInitialFinalAndTimes(initial, finalNet, times);
-    this.grossInterestAverage.set(grossInterestAverage);
-    this.netInterestAverage.set(netInterestAverage);
+    return { gross, net };
+  }
+
+  private calcFees(investment: IInvestment) {
+    const lastDailyPosition: IInvestmentDailyPosition =
+      investment.dailyPosition![0];
+    const value = investment.value;
+    const { grossValue, netValue } = lastDailyPosition;
+    const totalGross = grossValue - value;
+    const fees = grossValue - netValue;
+    const feesPercentage = fees / totalGross;
+    return { fees, feesPercentage };
+  }
+
+  private calcTotals(investment: IInvestment) {
+    const lastDailyPosition: IInvestmentDailyPosition =
+      investment.dailyPosition![0];
+    const value = investment.value;
+    const { grossValue, netValue } = lastDailyPosition;
+    const gross = grossValue - value;
+    const net = netValue - value;
+    const grossPercentage = gross / value;
+    const netPercentage = net / value;
+    return { gross, grossPercentage, grossValue, net, netPercentage, netValue };
   }
 }

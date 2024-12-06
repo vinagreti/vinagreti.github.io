@@ -8,15 +8,10 @@
   <div class="flex flex-col max-w-screen-lg m-auto h-full">
     <!-- HEADER -->
     <div
-      class="flex flex-row flex-wrap gap-y-3 gap-x-16 items-center justify-between p-4 text-xl"
+      class="flex flex-row flex-wrap gap-y-3 gap-x-4 items-center justify-between p-4 text-xl"
     >
-      <a class="flex flex-row items-center gap-4 font-bold" routerLink="/">
-        <img src="images/foto.png" alt="" class="w-16 rounded-full" />
-        Bruno João
-      </a>
-
       <div id="dropdown-menu">
-        <app-dropdown [avoidOverflowRight]="true" title="&#9776;">
+        <app-dropdown [avoidOverflowLeft]="true" title="&#9776;">
           <div class="flex flex-col gap-2 p-4 bg-accent">
             <ng-container *ngIf="user$ | async">
               <a class="button" routerLink="/notes">Notes</a>
@@ -43,6 +38,10 @@
           </div>
         </app-dropdown>
       </div>
+      <a class="flex flex-row items-center gap-4 font-bold" routerLink="/">
+        <img src="images/foto.png" alt="" class="w-16 rounded-full" />
+        Bruno João
+      </a>
 
       <div
         id="list-menu"
@@ -60,6 +59,9 @@
         <a routerLink="/login" *ngIf="!(user$ | async)">
           <app-icon icon="person" class="text-highlight"></app-icon>
         </a>
+      </div>
+
+      <div class="flex gap-2">
         <button
           (click)="templateService.toggleTheme()"
           *ngIf="
