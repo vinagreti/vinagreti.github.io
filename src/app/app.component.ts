@@ -8,20 +8,19 @@ import { CoreModule } from "./core/core.module";
 import { DropdownComponent } from "@components/ui/dropdown/dropdown.component";
 
 @Component({
-  selector: "app-root",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CoreModule,
-    RouterOutlet,
-    RouterLink,
-    AsyncPipe,
-    NgIf,
-    IconComponent,
-    DropdownComponent,
-  ],
-  templateUrl: "./app.component.html",
-  styleUrl: "./app.component.scss",
+    selector: "app-root",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CoreModule,
+        RouterOutlet,
+        RouterLink,
+        AsyncPipe,
+        NgIf,
+        IconComponent,
+        DropdownComponent,
+    ],
+    templateUrl: "./app.component.html",
+    styleUrl: "./app.component.scss"
 })
 export class AppComponent {
   templateService = inject(TemplateService);

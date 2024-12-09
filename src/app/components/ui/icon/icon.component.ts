@@ -10,12 +10,11 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { ICONS } from "./icons";
 
 @Component({
-  selector: "app-icon",
-  templateUrl: "./icon.component.html",
-  styleUrls: ["./icon.component.scss"],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+    selector: "app-icon",
+    templateUrl: "./icon.component.html",
+    styleUrls: ["./icon.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: []
 })
 export class IconComponent {
   private sanitizer = inject(DomSanitizer);

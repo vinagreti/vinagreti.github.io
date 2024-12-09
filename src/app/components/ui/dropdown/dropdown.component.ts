@@ -10,12 +10,11 @@ import {
 } from "@angular/core";
 
 @Component({
-  selector: "app-dropdown",
-  standalone: true,
-  imports: [NgStyle],
-  templateUrl: "./dropdown.component.html",
-  styleUrl: "./dropdown.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-dropdown",
+    imports: [NgStyle],
+    templateUrl: "./dropdown.component.html",
+    styleUrl: "./dropdown.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent {
   isMenuClosed = signal(true);

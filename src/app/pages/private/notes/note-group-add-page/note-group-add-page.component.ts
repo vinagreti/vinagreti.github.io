@@ -9,12 +9,11 @@ import { format } from "date-fns";
 import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 
 @Component({
-  selector: "app-note-group-add-page",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, FormsModule, NgFor, PageWrapperComponent],
-  templateUrl: "./note-group-add-page.component.html",
-  styleUrl: "./note-group-add-page.component.scss",
+    selector: "app-note-group-add-page",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [AsyncPipe, FormsModule, NgFor, PageWrapperComponent],
+    templateUrl: "./note-group-add-page.component.html",
+    styleUrl: "./note-group-add-page.component.scss"
 })
 export class NoteGroupAddPageComponent {
   private noteService = inject(NoteService);

@@ -17,19 +17,18 @@ export type CompoundData = {
 };
 
 @Component({
-  selector: "app-compound-interest-page",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    FormsModule,
-    AsyncPipe,
-    CurrencyPipe,
-    NgFor,
-    NgIf,
-    PageWrapperComponent,
-  ],
-  templateUrl: "./compound-interest-page.component.html",
-  styleUrl: "./compound-interest-page.component.scss",
+    selector: "app-compound-interest-page",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        FormsModule,
+        AsyncPipe,
+        CurrencyPipe,
+        NgFor,
+        NgIf,
+        PageWrapperComponent,
+    ],
+    templateUrl: "./compound-interest-page.component.html",
+    styleUrl: "./compound-interest-page.component.scss"
 })
 export class CompoundInterestPageComponent implements OnInit {
   totalWithInterest$ = new ReplaySubject<number>(1);

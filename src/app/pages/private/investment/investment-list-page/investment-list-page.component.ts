@@ -8,20 +8,19 @@ import { IInvestment } from "@services/investment/investment.types";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
-  selector: "app-investment-list-page",
-  standalone: true,
-  imports: [
-    RouterLink,
-    AsyncPipe,
-    NgFor,
-    DatePipe,
-    CurrencyPipe,
-    PageWrapperComponent,
-    PageWrapperActionsComponent,
-  ],
-  templateUrl: "./investment-list-page.component.html",
-  styleUrl: "./investment-list-page.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-investment-list-page",
+    imports: [
+        RouterLink,
+        AsyncPipe,
+        NgFor,
+        DatePipe,
+        CurrencyPipe,
+        PageWrapperComponent,
+        PageWrapperActionsComponent,
+    ],
+    templateUrl: "./investment-list-page.component.html",
+    styleUrl: "./investment-list-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvestmentListPageComponent {
   investmentService = inject(InvestmentService);

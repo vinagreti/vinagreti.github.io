@@ -8,12 +8,11 @@ import { INVESTMENT_STATUS } from "@services/investment/investment.types";
 import { ReplaySubject } from "rxjs";
 
 @Component({
-  selector: "app-investment-add-page",
-  standalone: true,
-  imports: [AsyncPipe, RouterModule, FormsModule, PageWrapperComponent],
-  templateUrl: "./investment-add-page.component.html",
-  styleUrl: "./investment-add-page.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-investment-add-page",
+    imports: [AsyncPipe, RouterModule, FormsModule, PageWrapperComponent],
+    templateUrl: "./investment-add-page.component.html",
+    styleUrl: "./investment-add-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvestmentAddPageComponent {
   formData = {

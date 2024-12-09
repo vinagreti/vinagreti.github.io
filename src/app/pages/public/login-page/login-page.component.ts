@@ -6,12 +6,11 @@ import { UserService } from "@services/user/user.service";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
-  selector: "app-login-page",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RouterModule, AsyncPipe],
-  templateUrl: "./login-page.component.html",
-  styleUrl: "./login-page.component.scss",
+    selector: "app-login-page",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [FormsModule, RouterModule, AsyncPipe],
+    templateUrl: "./login-page.component.html",
+    styleUrl: "./login-page.component.scss"
 })
 export class LoginPageComponent {
   private userService = inject(UserService);

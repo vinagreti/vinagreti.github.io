@@ -12,12 +12,11 @@ import {
 import { ReplaySubject } from "rxjs";
 
 @Component({
-  selector: "app-note-add-page",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, FormsModule, NgFor, PageWrapperComponent],
-  templateUrl: "./note-add-page.component.html",
-  styleUrl: "./note-add-page.component.scss",
+    selector: "app-note-add-page",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [AsyncPipe, FormsModule, NgFor, PageWrapperComponent],
+    templateUrl: "./note-add-page.component.html",
+    styleUrl: "./note-add-page.component.scss"
 })
 export class NoteAddPageComponent {
   private noteService = inject(NoteService);

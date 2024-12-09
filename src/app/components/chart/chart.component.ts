@@ -11,12 +11,11 @@ import { PlotlyModule } from "angular-plotly.js";
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @Component({
-  selector: "app-chart",
-  standalone: true,
-  imports: [PlotlyModule],
-  templateUrl: "./chart.component.html",
-  styleUrl: "./chart.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-chart",
+    imports: [PlotlyModule],
+    templateUrl: "./chart.component.html",
+    styleUrl: "./chart.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent {
   data = input.required<Partial<Plotly.PlotData>[]>();

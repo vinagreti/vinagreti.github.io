@@ -26,12 +26,11 @@ export enum MOVEMENT_DIRECTION {
 }
 
 @Component({
-  selector: "app-snake-page",
-  standalone: true,
-  imports: [NgStyle, NgFor, PageWrapperComponent],
-  templateUrl: "./snake-page.component.html",
-  styleUrl: "./snake-page.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-snake-page",
+    imports: [NgStyle, NgFor, PageWrapperComponent],
+    templateUrl: "./snake-page.component.html",
+    styleUrl: "./snake-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SnakePageComponent implements OnInit {
   boardSize = signal(20);

@@ -8,18 +8,17 @@ import { INoteGroup } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
-  selector: "app-notes-page",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    NgFor,
-    AsyncPipe,
-    RouterLink,
-    PageWrapperComponent,
-    PageWrapperActionsComponent,
-  ],
-  templateUrl: "./notes-page.component.html",
-  styleUrl: "./notes-page.component.scss",
+    selector: "app-notes-page",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        NgFor,
+        AsyncPipe,
+        RouterLink,
+        PageWrapperComponent,
+        PageWrapperActionsComponent,
+    ],
+    templateUrl: "./notes-page.component.html",
+    styleUrl: "./notes-page.component.scss"
 })
 export class NotesPageComponent {
   noteService = inject(NoteService);

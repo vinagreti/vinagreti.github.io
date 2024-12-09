@@ -8,12 +8,11 @@ import { IInvestmentDailyPosition } from "@services/investment/investment.types"
 import { ReplaySubject } from "rxjs";
 
 @Component({
-  selector: "app-investment-position-add-page",
-  standalone: true,
-  imports: [FormsModule, RouterModule, DatePipe, NgIf, PageWrapperComponent],
-  templateUrl: "./investment-position-add-page.component.html",
-  styleUrl: "./investment-position-add-page.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-investment-position-add-page",
+    imports: [FormsModule, RouterModule, DatePipe, NgIf, PageWrapperComponent],
+    templateUrl: "./investment-position-add-page.component.html",
+    styleUrl: "./investment-position-add-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvestmentPositionAddPageComponent {
   private route = inject(ActivatedRoute);

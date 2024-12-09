@@ -21,12 +21,11 @@ type FormData = {
 };
 
 @Component({
-  selector: "app-interest-by-initial-final-months-page",
-  standalone: true,
-  imports: [PageWrapperComponent, FormsModule, PercentPipe],
-  templateUrl: "./interest-by-initial-final-months-page.component.html",
-  styleUrl: "./interest-by-initial-final-months-page.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-interest-by-initial-final-months-page",
+    imports: [PageWrapperComponent, FormsModule, PercentPipe],
+    templateUrl: "./interest-by-initial-final-months-page.component.html",
+    styleUrl: "./interest-by-initial-final-months-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InterestByInitialFinalMonthsPageComponent implements OnInit {
   destroyRef = inject(DestroyRef);

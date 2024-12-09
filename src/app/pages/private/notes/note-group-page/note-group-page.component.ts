@@ -14,20 +14,19 @@ import {
 import { BehaviorSubject, firstValueFrom, ReplaySubject } from "rxjs";
 
 @Component({
-  selector: "app-note-group-page",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    AsyncPipe,
-    NgFor,
-    NgIf,
-    RouterModule,
-    FormsModule,
-    PageWrapperComponent,
-    PageWrapperActionsComponent,
-  ],
-  templateUrl: "./note-group-page.component.html",
-  styleUrl: "./note-group-page.component.scss",
+    selector: "app-note-group-page",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        AsyncPipe,
+        NgFor,
+        NgIf,
+        RouterModule,
+        FormsModule,
+        PageWrapperComponent,
+        PageWrapperActionsComponent,
+    ],
+    templateUrl: "./note-group-page.component.html",
+    styleUrl: "./note-group-page.component.scss"
 })
 export class NoteGroupPageComponent {
   noteService = inject(NoteService);
