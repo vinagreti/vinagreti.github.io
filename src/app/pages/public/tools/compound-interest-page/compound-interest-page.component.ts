@@ -1,6 +1,7 @@
 import { AsyncPipe, CurrencyPipe, NgFor, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { combineLatest, map, ReplaySubject } from "rxjs";
 
 export type CompoundData = {
@@ -19,7 +20,14 @@ export type CompoundData = {
   selector: "app-compound-interest-page",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, AsyncPipe, CurrencyPipe, NgFor, NgIf],
+  imports: [
+    FormsModule,
+    AsyncPipe,
+    CurrencyPipe,
+    NgFor,
+    NgIf,
+    PageWrapperComponent,
+  ],
   templateUrl: "./compound-interest-page.component.html",
   styleUrl: "./compound-interest-page.component.scss",
 })

@@ -1,11 +1,13 @@
-<div class="flex flex-col gap-6 h-full">
-  <div>
-    <a class="button" [routerLink]="['/notes']"><- Back</a>
-  </div>
-  <div
-    *ngIf="noteGroup$ | async as noteGroup"
-    class="flex flex-col gap-2 overflow-auto"
-  >
+<app-page-wrapper
+  title="Notes"
+  backTo="/notes"
+  *ngIf="noteGroup$ | async as noteGroup"
+>
+  <app-page-wrapper-actions>
+    <a class="button block" [routerLink]="['/notes', 'add', noteGroup.id]">+</a>
+  </app-page-wrapper-actions>
+
+  <div class="flex flex-col gap-2 overflow-auto">
     <form class="flex justify-between items-center">
       <div>
         <input
@@ -46,11 +48,6 @@
               {{ noteGroupType }}
             </option>
           </select>
-        </div>
-        <div class="flex items-center gap-2">
-          <a class="button block" [routerLink]="['/notes', 'add', noteGroup.id]"
-            >+ note</a
-          >
         </div>
       </div>
     </form>
@@ -135,4 +132,4 @@
       </div>
     </form>
   </div>
-</div>
+</app-page-wrapper>

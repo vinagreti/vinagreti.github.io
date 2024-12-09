@@ -2,6 +2,7 @@ import { AsyncPipe, NgFor } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { NoteService } from "@services/note/note.service";
 import {
   INoteGroup,
@@ -14,7 +15,7 @@ import { ReplaySubject } from "rxjs";
   selector: "app-note-add-page",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, FormsModule, NgFor],
+  imports: [AsyncPipe, FormsModule, NgFor, PageWrapperComponent],
   templateUrl: "./note-add-page.component.html",
   styleUrl: "./note-add-page.component.scss",
 })

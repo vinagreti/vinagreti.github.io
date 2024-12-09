@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { ReplaySubject } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 
 export enum TILE_CONTENT {
   FREE = "gray",
@@ -27,7 +28,7 @@ export enum MOVEMENT_DIRECTION {
 @Component({
   selector: "app-snake-page",
   standalone: true,
-  imports: [NgStyle, NgFor],
+  imports: [NgStyle, NgFor, PageWrapperComponent],
   templateUrl: "./snake-page.component.html",
   styleUrl: "./snake-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

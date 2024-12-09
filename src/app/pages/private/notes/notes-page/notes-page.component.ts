@@ -1,6 +1,8 @@
 import { AsyncPipe, NgFor } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { PageWrapperActionsComponent } from "@components/ui/page-wrapper/page-wrapper-actions/page-wrapper-actions.component";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { NoteService } from "@services/note/note.service";
 import { INoteGroup } from "@services/note/note.types";
 import { BehaviorSubject } from "rxjs";
@@ -9,7 +11,13 @@ import { BehaviorSubject } from "rxjs";
   selector: "app-notes-page",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, AsyncPipe, RouterLink],
+  imports: [
+    NgFor,
+    AsyncPipe,
+    RouterLink,
+    PageWrapperComponent,
+    PageWrapperActionsComponent,
+  ],
   templateUrl: "./notes-page.component.html",
   styleUrl: "./notes-page.component.scss",
 })

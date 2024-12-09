@@ -37,6 +37,8 @@ textarea {
 button {
   @apply border border-2 rounded border-accent py-2 px-3;
 
+  display: inline-block;
+
   &.raw-button {
     border: 0px;
   }

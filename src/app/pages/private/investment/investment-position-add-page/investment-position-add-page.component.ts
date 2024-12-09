@@ -2,6 +2,7 @@ import { DatePipe, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { InvestmentService } from "@services/investment/investment.service";
 import { IInvestmentDailyPosition } from "@services/investment/investment.types";
 import { ReplaySubject } from "rxjs";
@@ -9,7 +10,7 @@ import { ReplaySubject } from "rxjs";
 @Component({
   selector: "app-investment-position-add-page",
   standalone: true,
-  imports: [FormsModule, RouterModule, DatePipe, NgIf],
+  imports: [FormsModule, RouterModule, DatePipe, NgIf, PageWrapperComponent],
   templateUrl: "./investment-position-add-page.component.html",
   styleUrl: "./investment-position-add-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

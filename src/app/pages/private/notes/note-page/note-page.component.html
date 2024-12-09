@@ -1,13 +1,7 @@
-<div class="flex flex-col gap-6">
-  <div>
-    <a class="button" [routerLink]="['/notes', noteGroupId$ | async]"
-      ><- Back</a
-    >
-  </div>
-  <ng-container *ngIf="note$ | async as note">
-    <h1>{{ note.title }}</h1>
-    <div>
-      {{ note.content }}
-    </div>
-  </ng-container>
-</div>
+<app-page-wrapper
+  *ngIf="note$ | async as note"
+  [title]="note.title"
+  [backTo]="['/notes', noteGroupId$ | async]"
+>
+  {{ note.content }}
+</app-page-wrapper>

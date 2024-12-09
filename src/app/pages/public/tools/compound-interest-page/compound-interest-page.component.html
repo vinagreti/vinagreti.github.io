@@ -1,134 +1,134 @@
-<div class="flex flex-col gap-4 w-full">
-  <h1>Compound interest</h1>
-
-  <div class="flex gap-4">
-    <form class="grow flex flex-col gap-2" #form="ngForm">
-      <div class="flex gap-2">
-        <div class="flex flex-col gap-2">
-          <label for="initialValue" class="w-28">Initial</label>
-          <input
-            type="number"
-            name="initialValue"
-            id="initialValue"
-            placeholder="Initial value"
-            [(ngModel)]="data.initialValue"
-            (ngModelChange)="form.valid && calc()"
-            required
-          />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="interest" class="w-28">Interest</label>
-          <input
-            type="number"
-            name="interest"
-            id="interest"
-            placeholder="Interest from 0 to 100"
-            [(ngModel)]="data.interest"
-            (ngModelChange)="form.valid && calc()"
-            required
-          />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="times" class="w-28">Times</label>
-          <input
-            type="number"
-            name="times"
-            id="times"
-            placeholder="Number of times"
-            [(ngModel)]="data.times"
-            (ngModelChange)="form.valid && calc()"
-            [min]="1"
-            required
-          />
-        </div>
-      </div>
-
-      <div
-        class="flex gap-2 items-center w-full"
-        *ngFor="let apport of data.apports; let apportIndex = index"
-      >
-        <div class="flex flex-col gap-2">
-          <label for="apports" class="w-28">Apport</label>
-          <input
-            type="number"
-            name="apports"
-            id="apports"
-            placeholder="Apports"
-            [(ngModel)]="apport.value"
-            (ngModelChange)="form.valid && calc()"
-          />
+<app-page-wrapper title="Compound interest" backTo="/tools">
+  <div class="flex flex-col gap-4 w-full">
+    <div class="flex gap-4">
+      <form class="grow flex flex-col gap-2" #form="ngForm">
+        <div class="flex gap-2">
+          <div class="flex flex-col gap-2">
+            <label for="initialValue" class="w-28">Initial</label>
+            <input
+              type="number"
+              name="initialValue"
+              id="initialValue"
+              placeholder="Initial value"
+              [(ngModel)]="data.initialValue"
+              (ngModelChange)="form.valid && calc()"
+              required
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="interest" class="w-28">Interest</label>
+            <input
+              type="number"
+              name="interest"
+              id="interest"
+              placeholder="Interest from 0 to 100"
+              [(ngModel)]="data.interest"
+              (ngModelChange)="form.valid && calc()"
+              required
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="times" class="w-28">Times</label>
+            <input
+              type="number"
+              name="times"
+              id="times"
+              placeholder="Number of times"
+              [(ngModel)]="data.times"
+              (ngModelChange)="form.valid && calc()"
+              [min]="1"
+              required
+            />
+          </div>
         </div>
 
         <div
-          class="flex flex-col gap-2 max-w-full overflow-auto"
-          *ngIf="installmentIndexes$ | async as installmentIndexes"
+          class="flex gap-2 items-center w-full"
+          *ngFor="let apport of data.apports; let apportIndex = index"
         >
-          <label for="apport">Installments</label>
-          <div class="flex flex-wrap gap-2">
-            <div
-              class="flex flex-row-reverse justify-center items-center rounded bg-accent px-2 py-1 gap-1 cursor-pointer"
-              *ngFor="let installment of installmentIndexes"
-            >
-              <label for="apport">{{ installment }}</label>
-              <input
-                class="w-5 h-5 rounded cursor-pointer"
-                type="checkbox"
-                [name]="'apport' + apportIndex"
-                [id]="'apport' + apportIndex"
-                [(ngModel)]="
-                  data.apports[apportIndex].installments[installment]
-                "
-                (ngModelChange)="form.valid && calc()"
-                (click)="$event.stopPropagation()"
-              />
+          <div class="flex flex-col gap-2">
+            <label for="apports" class="w-28">Apport</label>
+            <input
+              type="number"
+              name="apports"
+              id="apports"
+              placeholder="Apports"
+              [(ngModel)]="apport.value"
+              (ngModelChange)="form.valid && calc()"
+            />
+          </div>
+
+          <div
+            class="flex flex-col gap-2 max-w-full overflow-auto"
+            *ngIf="installmentIndexes$ | async as installmentIndexes"
+          >
+            <label for="apport">Installments</label>
+            <div class="flex flex-wrap gap-2">
+              <div
+                class="flex flex-row-reverse justify-center items-center rounded bg-accent px-2 py-1 gap-1 cursor-pointer"
+                *ngFor="let installment of installmentIndexes"
+              >
+                <label for="apport">{{ installment }}</label>
+                <input
+                  class="w-5 h-5 rounded cursor-pointer"
+                  type="checkbox"
+                  [name]="'apport' + apportIndex"
+                  [id]="'apport' + apportIndex"
+                  [(ngModel)]="
+                    data.apports[apportIndex].installments[installment]
+                  "
+                  (ngModelChange)="form.valid && calc()"
+                  (click)="$event.stopPropagation()"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
 
-    <div class="border rounded w-40">
-      <div>
-        <div>Added:</div>
-        <b class="text-accent">
-          {{ totalWithoutInterest$ | async | currency : "BRL" }}
-        </b>
-      </div>
-      <div>
-        <div>Gains:</div>
-        <b class="text-accent">{{ gain$ | async | currency : "BRL" }}</b>
-      </div>
-      <div>
-        <div>Final:</div>
-        <b class="text-accent">
-          {{ totalWithInterest$ | async | currency : "BRL" }}
-        </b>
+      <div class="border rounded w-40">
+        <div>
+          <div>Added:</div>
+          <b class="text-accent">
+            {{ totalWithoutInterest$ | async | currency : "BRL" }}
+          </b>
+        </div>
+        <div>
+          <div>Gains:</div>
+          <b class="text-accent">{{ gain$ | async | currency : "BRL" }}</b>
+        </div>
+        <div>
+          <div>Final:</div>
+          <b class="text-accent">
+            {{ totalWithInterest$ | async | currency : "BRL" }}
+          </b>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="flex flex-col gap-1">
-    <div class="flex">
-      <div class="w-12 border p-1 text-xs">Index</div>
-      <div class="grow basis-0 border p-1 text-xs">Apport</div>
-      <div class="grow basis-0 border p-1 text-xs">Total</div>
-      <div class="grow basis-0 border p-1 text-xs">Interest</div>
-    </div>
-    <ng-container *ngFor="let installment of installments$ | async">
-      <div class="flex hover:bg-accent">
-        <div class="w-12 border p-1 text-xs">
-          {{ installment.index }}
-        </div>
-        <div class="grow basis-0 border p-1 text-xs">
-          {{ installment.apport | currency : "BRL" }}
-        </div>
-        <div class="grow basis-0 border p-1 text-xs">
-          {{ installment.totalWithInterest | currency : "BRL" }}
-        </div>
-        <div class="grow basis-0 border p-1 text-xs">
-          {{ installment.interest | currency : "BRL" }}
-        </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex">
+        <div class="w-12 border p-1 text-xs">Index</div>
+        <div class="grow basis-0 border p-1 text-xs">Apport</div>
+        <div class="grow basis-0 border p-1 text-xs">Total</div>
+        <div class="grow basis-0 border p-1 text-xs">Interest</div>
       </div>
-    </ng-container>
+      <ng-container *ngFor="let installment of installments$ | async">
+        <div class="flex hover:bg-accent">
+          <div class="w-12 border p-1 text-xs">
+            {{ installment.index }}
+          </div>
+          <div class="grow basis-0 border p-1 text-xs">
+            {{ installment.apport | currency : "BRL" }}
+          </div>
+          <div class="grow basis-0 border p-1 text-xs">
+            {{ installment.totalWithInterest | currency : "BRL" }}
+          </div>
+          <div class="grow basis-0 border p-1 text-xs">
+            {{ installment.interest | currency : "BRL" }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
-</div>
+</app-page-wrapper>

@@ -2,6 +2,8 @@ import { AsyncPipe, NgFor, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterModule } from "@angular/router";
+import { PageWrapperActionsComponent } from "@components/ui/page-wrapper/page-wrapper-actions/page-wrapper-actions.component";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { NoteService } from "@services/note/note.service";
 import {
   INote,
@@ -21,6 +23,8 @@ import { BehaviorSubject, firstValueFrom, ReplaySubject } from "rxjs";
     NgIf,
     RouterModule,
     FormsModule,
+    PageWrapperComponent,
+    PageWrapperActionsComponent,
   ],
   templateUrl: "./note-group-page.component.html",
   styleUrl: "./note-group-page.component.scss",

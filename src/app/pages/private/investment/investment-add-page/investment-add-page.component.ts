@@ -2,6 +2,7 @@ import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { InvestmentService } from "@services/investment/investment.service";
 import { INVESTMENT_STATUS } from "@services/investment/investment.types";
 import { ReplaySubject } from "rxjs";
@@ -9,7 +10,7 @@ import { ReplaySubject } from "rxjs";
 @Component({
   selector: "app-investment-add-page",
   standalone: true,
-  imports: [AsyncPipe, RouterModule, FormsModule],
+  imports: [AsyncPipe, RouterModule, FormsModule, PageWrapperComponent],
   templateUrl: "./investment-add-page.component.html",
   styleUrl: "./investment-add-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

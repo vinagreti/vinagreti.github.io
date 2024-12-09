@@ -1,15 +1,7 @@
-<div class="flex flex-col gap-4">
-  <div class="flex gap4 justify-between">
-    <div>
-      <a class="button" [routerLink]="['/']"><- Back</a>
-    </div>
-    <div>
-      <a class="button" [routerLink]="['/investment', 'add']">+ Investment</a>
-    </div>
-  </div>
-
-  <h1>Investments</h1>
-
+<app-page-wrapper title="Investments" backTo="/">
+  <app-page-wrapper-actions>
+    <a class="button" [routerLink]="['/investment', 'add']">+</a>
+  </app-page-wrapper-actions>
   <a
     class="border py-1 px-3"
     *ngFor="let investment of investments$ | async; trackBy: trackBy"
@@ -44,4 +36,4 @@
       </div>
     </div>
   </a>
-</div>
+</app-page-wrapper>

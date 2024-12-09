@@ -1,12 +1,4 @@
-<div class="flex flex-col gap-4 h-full">
-  <div class="flex gap4 justify-between">
-    <div>
-      <a class="button" [routerLink]="['/investment']"><- Back</a>
-    </div>
-  </div>
-
-  <h1>New investment</h1>
-
+<app-page-wrapper title="New investment" backTo="/investment">
   <form class="flex flex-col gap-4" #form="ngForm" (submit)="addNewItem()">
     <div>
       <input
@@ -59,4 +51,4 @@
       </button>
     </div>
   </form>
-</div>
+</app-page-wrapper>

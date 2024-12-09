@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 
 @Component({
   selector: "app-contact-page",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [PageWrapperComponent],
   templateUrl: "./contact-page.component.html",
   styleUrl: "./contact-page.component.scss",
 })

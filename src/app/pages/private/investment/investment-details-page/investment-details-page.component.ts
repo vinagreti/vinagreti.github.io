@@ -22,6 +22,8 @@ import {
   IInvestmentDailyPosition,
 } from "@services/investment/investment.types";
 import { firstValueFrom, map } from "rxjs";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
+import { PageWrapperActionsComponent } from "@components/ui/page-wrapper/page-wrapper-actions/page-wrapper-actions.component";
 
 @Component({
   selector: "app-investment-details-page",
@@ -36,6 +38,8 @@ import { firstValueFrom, map } from "rxjs";
     PercentPipe,
     DecimalPipe,
     ChartComponent,
+    PageWrapperComponent,
+    PageWrapperActionsComponent,
   ],
   templateUrl: "./investment-details-page.component.html",
   styleUrl: "./investment-details-page.component.scss",

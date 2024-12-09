@@ -1,19 +1,13 @@
-<div class="flex flex-col gap-4">
-  <div class="flex gap4 justify-between">
-    <div>
-      <a class="button" [routerLink]="['/investment']"><- Back</a>
-    </div>
-    <div>
-      <a class="button" [routerLink]="['.', 'position-add']">
-        + Daily Position
-      </a>
-    </div>
-  </div>
-  <ng-container *ngIf="investment() as investment">
-    <div class="flex gap4 justify-between">
-      <h1>{{ investment.title }}</h1>
-    </div>
+<app-page-wrapper
+  *ngIf="investment() as investment"
+  [title]="investment.title"
+  backTo="/investment"
+>
+  <app-page-wrapper-actions>
+    <a class="button" [routerLink]="['.', 'position-add']">+</a>
+  </app-page-wrapper-actions>
 
+  <div class="flex flex-col gap-4">
     <div class="flex flex-col">
       <div class="flex gap-1">
         <label for="value">Initial:</label>
@@ -169,5 +163,5 @@
         </div>
       </a>
     </div>
-  </ng-container>
-</div>
+  </div>
+</app-page-wrapper>

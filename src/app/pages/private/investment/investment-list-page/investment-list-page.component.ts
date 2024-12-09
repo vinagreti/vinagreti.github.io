@@ -1,6 +1,8 @@
 import { AsyncPipe, CurrencyPipe, DatePipe, NgFor } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { PageWrapperActionsComponent } from "@components/ui/page-wrapper/page-wrapper-actions/page-wrapper-actions.component";
+import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.component";
 import { InvestmentService } from "@services/investment/investment.service";
 import { IInvestment } from "@services/investment/investment.types";
 import { BehaviorSubject } from "rxjs";
@@ -8,7 +10,15 @@ import { BehaviorSubject } from "rxjs";
 @Component({
   selector: "app-investment-list-page",
   standalone: true,
-  imports: [RouterLink, AsyncPipe, NgFor, DatePipe, CurrencyPipe],
+  imports: [
+    RouterLink,
+    AsyncPipe,
+    NgFor,
+    DatePipe,
+    CurrencyPipe,
+    PageWrapperComponent,
+    PageWrapperActionsComponent,
+  ],
   templateUrl: "./investment-list-page.component.html",
   styleUrl: "./investment-list-page.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
