@@ -107,6 +107,17 @@ export class InvestmentDetailsPageComponent {
     return item.id;
   }
 
+  async removeDailyPosition(
+    investmentId: string,
+    dailyPosition: IInvestmentDailyPosition,
+  ) {
+    await this.investmentService.deleteDailyPosition(
+      investmentId,
+      dailyPosition,
+    );
+    return this.loadInvestment();
+  }
+
   private async loadInvestment() {
     const investmentId = await firstValueFrom(this.investmentId$);
     const investmentRef = await this.investmentService.get(investmentId);

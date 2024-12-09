@@ -89,7 +89,7 @@
         "
         [routerLink]="['.', dailyPosition.id]"
       >
-        <div class="flex gap-4">
+        <div class="flex gap-4 justify-between">
           <div class="grow flex flex-col">
             <div class="text-accent">{{ dailyPosition.date | date }}</div>
 
@@ -149,6 +149,21 @@
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div>
+              <button
+                class="px-4"
+                (click)="
+                  $event.stopPropagation();
+                  $event.preventDefault();
+                  $event.preventDefault();
+                  removeDailyPosition(investment.id, dailyPosition)
+                "
+              >
+                x
+              </button>
             </div>
           </div>
         </div>

@@ -4,6 +4,8 @@ import { IInvestment, IInvestmentDailyPosition } from "./investment.types";
 import {
   collection,
   deleteDoc,
+  doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -40,6 +42,31 @@ export class InvestmentService {
         investment.id,
       );
       const res = await deleteDoc(investmentRef.snapshot.ref);
+      return res;
+    } else {
+      return undefined;
+    }
+  }
+
+  async deleteDailyPosition(
+    investmentId: string,
+    dailyPosition: IInvestmentDailyPosition,
+  ) {
+    const confirmed = await confirm(
+      `Do you want to remove the daily position "${dailyPosition.grossValue}/${dailyPosition.grossValue}"`,
+    );
+    if (confirmed) {
+      const investment = await this.firebaseService.get<IInvestment>(
+        "investment",
+        investmentId,
+      );
+      const dailyPositionCollectionRef = collection(
+        investment.snapshot.ref,
+        "dailyPosition",
+      );
+      const docRef = doc(dailyPositionCollectionRef, dailyPosition.id);
+      const snapshot = await getDoc(docRef);
+      const res = await deleteDoc(snapshot.ref);
       return res;
     } else {
       return undefined;
