@@ -23,13 +23,11 @@ export class InvestmentService {
     const investments = await this.firebaseService.list<IInvestment>(
       this.collection,
     );
-    return investments.snapshot.docs.map((itemRef, index) => {
-      const item = itemRef.data() as IInvestment;
-      return {
-        ...item,
-        id: itemRef.id,
-      };
-    });
+    const calls = investments.snapshot.docs.map((itemRef) =>
+      this.get(itemRef.id)
+    );
+    const res = await Promise.all(calls);
+    return res;
   }
 
   async delete(investment: IInvestment) {

@@ -90,17 +90,17 @@
         <div>
           <div>Added:</div>
           <b class="text-accent">
-            {{ totalWithoutInterest$ | async | currency : "BRL" }}
+            {{ totalWithoutInterest$ | async | currency }}
           </b>
         </div>
         <div>
           <div>Gains:</div>
-          <b class="text-accent">{{ gain$ | async | currency : "BRL" }}</b>
+          <b class="text-accent">{{ gain$ | async | currency }}</b>
         </div>
         <div>
           <div>Final:</div>
           <b class="text-accent">
-            {{ totalWithInterest$ | async | currency : "BRL" }}
+            {{ totalWithInterest$ | async | currency }}
           </b>
         </div>
       </div>
@@ -119,13 +119,13 @@
             {{ installment.index }}
           </div>
           <div class="grow basis-0 border p-1 text-xs">
-            {{ installment.apport | currency : "BRL" }}
+            {{ installment.apport | currency }}
           </div>
           <div class="grow basis-0 border p-1 text-xs">
-            {{ installment.totalWithInterest | currency : "BRL" }}
+            {{ installment.totalWithInterest | currency }}
           </div>
           <div class="grow basis-0 border p-1 text-xs">
-            {{ installment.interest | currency : "BRL" }}
+            {{ installment.interest | currency }}
           </div>
         </div>
       </ng-container>
