@@ -1,11 +1,12 @@
 {
-  "name": "vinagreti",
-  "short_name": "vinagreti",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Brunoi João",
+  "short_name": "Bruno",
+  "theme_color": "#161E27",
+  "background_color": "#161E27",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "scope": "https://brunojoao.com",
+  "start_url": "https://brunojoao.com",
+  "icon": "icons/icon-72x72.png",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
