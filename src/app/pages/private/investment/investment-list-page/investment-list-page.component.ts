@@ -1,4 +1,10 @@
-import { CurrencyPipe, DatePipe, NgFor, PercentPipe } from "@angular/common";
+import {
+  CurrencyPipe,
+  DatePipe,
+  NgFor,
+  NgIf,
+  PercentPipe,
+} from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,6 +29,7 @@ import { DocumentData, DocumentSnapshot } from "firebase/firestore/lite";
     PageWrapperComponent,
     PageWrapperActionsComponent,
     PercentPipe,
+    NgIf,
   ],
   templateUrl: "./investment-list-page.component.html",
   styleUrl: "./investment-list-page.component.scss",
