@@ -40,10 +40,12 @@ export class InvestmentListPageComponent {
 
   investmentService = inject(InvestmentService);
 
-  investments = signal<{
-    snapshot: DocumentSnapshot<DocumentData, DocumentData>;
-    item: IInvestment;
-  }[]>([]);
+  investments = signal<
+    {
+      snapshot: DocumentSnapshot<DocumentData, DocumentData>;
+      item: IInvestment;
+    }[] | null
+  >(null);
 
   totals = computed(() => {
     return this.computeTotals();
@@ -71,55 +73,60 @@ export class InvestmentListPageComponent {
   }
 
   private computeTotals() {
-    const totalsByInvestment = this.investments()?.map(
-      ({ item: investment }) => {
-        const { value, dailyPosition } = investment;
-        const lastDailyPosition = dailyPosition?.[0];
-        if (lastDailyPosition) {
-          const { grossValue, netValue } = lastDailyPosition;
-          return {
-            net: netValue,
-            gross: grossValue,
+    const investments = this.investments();
+    if (investments) {
+      const totalsByInvestment = investments.map(
+        ({ item: investment }) => {
+          const { value, dailyPosition } = investment;
+          const lastDailyPosition = dailyPosition?.[0];
+          if (lastDailyPosition) {
+            const { grossValue, netValue } = lastDailyPosition;
+            return {
+              net: netValue,
+              gross: grossValue,
 
-            fees: grossValue - netValue,
-            value,
-          };
-        } else {
-          return {
-            net: value,
-            gross: value,
-            netInterest: 0,
-            grossInterest: 0,
-            fees: value,
-            value,
-          };
-        }
-      },
-    );
+              fees: grossValue - netValue,
+              value,
+            };
+          } else {
+            return {
+              net: value,
+              gross: value,
+              netInterest: 0,
+              grossInterest: 0,
+              fees: value,
+              value,
+            };
+          }
+        },
+      );
 
-    const overallTotals = totalsByInvestment.reduce((acc, investment) => {
+      const overallTotals = totalsByInvestment.reduce((acc, investment) => {
+        return {
+          net: acc.net + investment.net,
+          gross: acc.gross + investment.gross,
+          fees: acc.fees + investment.fees,
+          value: acc.value + investment.value,
+        };
+      }, {
+        net: 0,
+        gross: 0,
+        netInterest: 0,
+        grossInterest: 0,
+        fees: 0,
+        value: 0,
+      });
+
+      const netInterest = (overallTotals.net / overallTotals.value) - 1;
+      const grossInterest = (overallTotals.gross / overallTotals.value) - 1;
+
       return {
-        net: acc.net + investment.net,
-        gross: acc.gross + investment.gross,
-        fees: acc.fees + investment.fees,
-        value: acc.value + investment.value,
+        ...overallTotals,
+        netInterest,
+        grossInterest,
       };
-    }, {
-      net: 0,
-      gross: 0,
-      netInterest: 0,
-      grossInterest: 0,
-      fees: 0,
-      value: 0,
-    });
-
-    const netInterest = (overallTotals.net / overallTotals.value) - 1;
-    const grossInterest = (overallTotals.gross / overallTotals.value) - 1;
-
-    return {
-      ...overallTotals,
-      netInterest,
-      grossInterest,
-    };
+    } else {
+      return null;
+    }
   }
 }
