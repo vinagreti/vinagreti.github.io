@@ -6,17 +6,17 @@
     <div class="flex gap-2">
       Value:
       <span class="bg-[#0000FF] px-1 rounded">{{
-        totals.value | currency
+        totals.value | currency : "BRL"
       }}</span>
     </div>
     <div class="flex gap-2">
       Net:
       <span class="flex gap-2 items-end">
         <span class="bg-[#008000] px-1 rounded">
-          {{ totals.net - totals.value | currency }}
+          {{ totals.net - totals.value | currency : "BRL" }}
         </span>
         <small class="text-accent">
-          ({{ totals.net | currency }}/
+          ({{ totals.net | currency : "BRL" }}/
           {{ totals.netInterest | percent : ".1-3" }})
         </small>
       </span>
@@ -25,16 +25,17 @@
       Gross:
       <span class="flex gap-2 items-end">
         <span class="bg-[#FF9000] px-1 rounded">
-          {{ totals.gross - totals.value | currency }}
+          {{ totals.gross - totals.value | currency : "BRL" }}
         </span>
         <small class="text-accent">
-          ({{ totals.gross | currency }} /
+          ({{ totals.gross | currency : "BRL" }} /
           {{ totals.grossInterest | percent : ".1-3" }})
         </small>
       </span>
     </div>
     <div class="flex gap-2">
-      Fees: <span class="text-accent">{{ totals.fees | currency }}</span>
+      Fees:
+      <span class="text-accent">{{ totals.fees | currency : "BRL" }}</span>
     </div>
   </div>
   <a
@@ -48,10 +49,10 @@
           <b class="text-accent">
             {{ investment.item.title }}
           </b>
-          <small>{{ investment.item.value | currency }}</small>
+          <small>{{ investment.item.value | currency : "BRL" }}</small>
           <small>
-            {{ investment.item.startDate | date }} -
-            {{ investment.item.dueDate | date }}
+            {{ investment.item.startDate | date : "shortDate" }} -
+            {{ investment.item.dueDate | date : "shortDate" }}
           </small>
         </div>
 

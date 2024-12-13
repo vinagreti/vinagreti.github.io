@@ -12,17 +12,17 @@
       <div class="flex gap-1">
         <label for="value">Initial:</label>
         <div id="value" class="bg-[#0000FF] px-1 rounded">
-          {{ investment.value | currency }}
+          {{ investment.value | currency : "BRL" }}
         </div>
       </div>
       <div class="flex gap-1">
         <label for="netInterestAverage">Gross:</label>
         <div class="flex gap-2 items-end">
           <span class="bg-[#FF9000] px-1 rounded">
-            {{ totals().grossValue | currency }}
+            {{ totals().grossValue | currency : "BRL" }}
           </span>
           <small class="text-accent">
-            ({{ totals().gross | currency }} -
+            ({{ totals().gross | currency : "BRL" }} -
             {{ totals().grossPercentage | percent : ".1-3" }})</small
           >
         </div>
@@ -31,10 +31,10 @@
         <label for="netInterestAverage">Net:</label>
         <div class="flex gap-2 items-end">
           <span class="bg-[#008000] px-1 rounded">
-            {{ totals().netValue | currency }}
+            {{ totals().netValue | currency : "BRL" }}
           </span>
           <small class="text-accent">
-            ({{ totals().net | currency }} -
+            ({{ totals().net | currency : "BRL" }} -
             {{ totals().netPercentage | percent : ".1-3" }})</small
           >
         </div>
@@ -44,8 +44,8 @@
       <div class="flex gap-1">
         <label for="startDate">Dates:</label>
         <div id="startDate" class="text-accent">
-          {{ investment.startDate | date }} -
-          {{ investment.dueDate | date }}
+          {{ investment.startDate | date : "shortDate" }} -
+          {{ investment.dueDate | date : "shortDate" }}
           <small
             >({{
               (investment.dueDate - todayDateTime) / (60e3 * 60 * 24)
@@ -70,7 +70,7 @@
       <div class="flex gap-1">
         <label for="netInterestAverage">Fees:</label>
         <div class="text-accent">
-          {{ fees().fees | currency }}
+          {{ fees().fees | currency : "BRL" }}
           <small> ({{ fees().feesPercentage | percent : ".1-3" }})</small>
         </div>
       </div>
@@ -91,14 +91,16 @@
       >
         <div class="flex gap-4 justify-between">
           <div class="grow flex flex-col">
-            <div class="text-accent">{{ dailyPosition.date | date }}</div>
+            <div class="text-accent">
+              {{ dailyPosition.date | date : "shortDate" }}
+            </div>
 
             <div class="flex flex-wrap md:gap-4">
               <div class="flex flex-wrap gap-4">
                 <div class="flex gap-1">
                   Bruto:
                   <span class="text-accent">
-                    {{ dailyPosition.grossValue | currency }}
+                    {{ dailyPosition.grossValue | currency : "BRL" }}
                   </span>
                 </div>
               </div>
@@ -106,7 +108,7 @@
                 <div class="flex gap-1">
                   Líquido:
                   <span class="text-accent">
-                    {{ dailyPosition.netValue | currency }}
+                    {{ dailyPosition.netValue | currency : "BRL" }}
                   </span>
                 </div>
               </div>
@@ -114,7 +116,10 @@
                 <div class="flex gap-1">
                   Lucro:
                   <span class="text-accent">
-                    {{ dailyPosition.netValue - investment.value | currency }}
+                    {{
+                      dailyPosition.netValue - investment.value
+                        | currency : "BRL"
+                    }}
                     ({{
                       (dailyPosition.netValue - investment.value) /
                         investment.value | percent : ".1-3"
@@ -127,7 +132,7 @@
                 <div class="flex gap-1">
                   IR:
                   <span class="text-accent">
-                    {{ dailyPosition.IR | currency }} ({{
+                    {{ dailyPosition.IR | currency : "BRL" }} ({{
                       dailyPosition.IR / dailyPosition.netValue
                         | percent : ".1-3"
                     }})
@@ -138,7 +143,7 @@
                 <div class="flex gap-4">
                   IOF:
                   <span class="text-accent">
-                    {{ dailyPosition.IOF | currency }} ({{
+                    {{ dailyPosition.IOF | currency : "BRL" }} ({{
                       dailyPosition.IOF /
                         (dailyPosition.grossValue - investment.value)
                         | percent : ".1-3"

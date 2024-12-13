@@ -5,8 +5,8 @@
         <div class="text-xl">{{ project.name }}</div>
         <div *ngIf="project.position">{{ project.position }}</div>
         <div class="flex flex-row gap-4 text-xs" *ngIf="project.from">
-          <div>{{ project.from | date }}</div>
-          <div *ngIf="project.to">- {{ project.to | date }}</div>
+          <div>{{ project.from | date : "shortDate" }}</div>
+          <div *ngIf="project.to">- {{ project.to | date : "shortDate" }}</div>
         </div>
         <a *ngIf="project.thumb" [routerLink]="project.thumb" target="_blank">
           <img

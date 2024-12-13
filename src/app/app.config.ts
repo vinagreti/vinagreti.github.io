@@ -1,6 +1,5 @@
 import {
   ApplicationConfig,
-  DEFAULT_CURRENCY_CODE,
   isDevMode,
   LOCALE_ID,
   provideZoneChangeDetection,
@@ -9,11 +8,7 @@ import { provideRouter } from "@angular/router";
 
 import { routes } from "./app.routes";
 import { provideServiceWorker } from "@angular/service-worker";
-import {
-  CurrencyPipe,
-  DATE_PIPE_DEFAULT_OPTIONS,
-  DatePipe,
-} from "@angular/common";
+import { CurrencyPipe, DatePipe } from "@angular/common";
 
 import { registerLocaleData } from "@angular/common";
 import localePt from "@angular/common/locales/pt";
@@ -49,11 +44,6 @@ export const appConfig: ApplicationConfig = {
       registrationStrategy: "registerWhenStable:30000",
     }),
     { provide: LOCALE_ID, useValue: localLanguage },
-    { provide: DEFAULT_CURRENCY_CODE, useValue: localCurrency },
-    {
-      provide: DATE_PIPE_DEFAULT_OPTIONS,
-      useValue: { dateFormat: "dd/MM/yy" },
-    },
     DatePipe,
     CurrencyPipe,
   ],
