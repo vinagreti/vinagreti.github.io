@@ -1,4 +1,4 @@
-import { CurrencyPipe, DatePipe, NgFor } from "@angular/common";
+import { CurrencyPipe, DatePipe, NgFor, PercentPipe } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,6 +22,7 @@ import { DocumentData, DocumentSnapshot } from "firebase/firestore/lite";
     CurrencyPipe,
     PageWrapperComponent,
     PageWrapperActionsComponent,
+    PercentPipe,
   ],
   templateUrl: "./investment-list-page.component.html",
   styleUrl: "./investment-list-page.component.scss",
@@ -72,6 +73,7 @@ export class InvestmentListPageComponent {
           return {
             net: netValue,
             gross: grossValue,
+
             fees: grossValue - netValue,
             value,
           };
@@ -79,6 +81,8 @@ export class InvestmentListPageComponent {
           return {
             net: value,
             gross: value,
+            netInterest: 0,
+            grossInterest: 0,
             fees: value,
             value,
           };
@@ -96,10 +100,19 @@ export class InvestmentListPageComponent {
     }, {
       net: 0,
       gross: 0,
+      netInterest: 0,
+      grossInterest: 0,
       fees: 0,
       value: 0,
     });
 
-    return overallTotals;
+    const netInterest = (overallTotals.net / overallTotals.value) - 1;
+    const grossInterest = (overallTotals.gross / overallTotals.value) - 1;
+
+    return {
+      ...overallTotals,
+      netInterest,
+      grossInterest,
+    };
   }
 }
