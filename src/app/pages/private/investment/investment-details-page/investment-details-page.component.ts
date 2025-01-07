@@ -26,23 +26,23 @@ import { PageWrapperComponent } from "@components/ui/page-wrapper/page-wrapper.c
 import { PageWrapperActionsComponent } from "@components/ui/page-wrapper/page-wrapper-actions/page-wrapper-actions.component";
 
 @Component({
-    selector: "app-investment-details-page",
-    imports: [
-        NgIf,
-        RouterModule,
-        RouterLink,
-        NgFor,
-        DatePipe,
-        CurrencyPipe,
-        PercentPipe,
-        DecimalPipe,
-        ChartComponent,
-        PageWrapperComponent,
-        PageWrapperActionsComponent,
-    ],
-    templateUrl: "./investment-details-page.component.html",
-    styleUrl: "./investment-details-page.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "app-investment-details-page",
+  imports: [
+    NgIf,
+    RouterModule,
+    RouterLink,
+    NgFor,
+    DatePipe,
+    CurrencyPipe,
+    PercentPipe,
+    DecimalPipe,
+    ChartComponent,
+    PageWrapperComponent,
+    PageWrapperActionsComponent,
+  ],
+  templateUrl: "./investment-details-page.component.html",
+  styleUrl: "./investment-details-page.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InvestmentDetailsPageComponent {
   investmentService = inject(InvestmentService);

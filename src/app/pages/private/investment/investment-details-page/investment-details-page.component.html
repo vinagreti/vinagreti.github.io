@@ -132,8 +132,10 @@
                 <div class="flex gap-1">
                   IR:
                   <span class="text-accent">
-                    {{ dailyPosition.IR | currency : "BRL" }} ({{
-                      dailyPosition.IR / dailyPosition.netValue
+                    {{ dailyPosition.IR | currency : "BRL" }}
+                    ({{
+                      dailyPosition.IR /
+                        (dailyPosition.grossValue - investment.value)
                         | percent : ".1-3"
                     }})
                   </span>
@@ -143,7 +145,8 @@
                 <div class="flex gap-4">
                   IOF:
                   <span class="text-accent">
-                    {{ dailyPosition.IOF | currency : "BRL" }} ({{
+                    {{ dailyPosition.IOF | currency : "BRL" }}
+                    ({{
                       dailyPosition.IOF /
                         (dailyPosition.grossValue - investment.value)
                         | percent : ".1-3"
