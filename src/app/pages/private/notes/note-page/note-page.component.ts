@@ -7,18 +7,18 @@ import { INote } from "@services/note/note.types";
 import { BehaviorSubject, firstValueFrom, map } from "rxjs";
 
 @Component({
-    selector: "app-note-page",
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgIf, AsyncPipe, RouterModule, PageWrapperComponent],
-    templateUrl: "./note-page.component.html",
-    styleUrl: "./note-page.component.scss"
+  selector: "app-note-page",
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgIf, AsyncPipe, RouterModule, PageWrapperComponent],
+  templateUrl: "./note-page.component.html",
+  styleUrl: "./note-page.component.scss",
 })
 export class NotePageComponent {
   noteService = inject(NoteService);
 
-  note$ = new BehaviorSubject<INote | null>(null);
-
   route = inject(ActivatedRoute);
+
+  note$ = new BehaviorSubject<INote | null>(null);
 
   noteGroupId$ = this.route.params.pipe(
     map((params) => params["noteGroupId"]),

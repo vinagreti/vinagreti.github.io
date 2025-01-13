@@ -70,8 +70,8 @@
             />
           </div>
           <div class="grow flex flex-col">
-            <b class="text-accent">{{ note.title }}</b>
-            <div>{{ note.content }}</div>
+            <b class="text-accent break-all">{{ note.title }}</b>
+            <div class="break-all" [innerHTML]="note.content"></div>
           </div>
           <div class="flex items-center gap-2">
             <div>

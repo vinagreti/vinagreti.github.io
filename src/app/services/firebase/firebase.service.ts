@@ -12,6 +12,8 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  orderBy,
+  query,
   WithFieldValue,
 } from "firebase/firestore/lite";
 
@@ -40,8 +42,17 @@ export class FirebaseService {
 
   async list<T = any>(
     collection: CollectionReference<DocumentData, DocumentData>,
+    sortProperty?: keyof T,
+    sortOrder: "asc" | "desc" = "asc",
   ) {
-    const snapshot = await getDocs(collection);
+    const params: [
+      CollectionReference<DocumentData, DocumentData>,
+      ...any,
+    ] = [
+      collection,
+      orderBy(sortProperty as string, sortOrder),
+    ];
+    const snapshot = await getDocs(query(...params));
     const items = snapshot.docs.map((item) => item.data() as T);
     return { items, snapshot };
   }

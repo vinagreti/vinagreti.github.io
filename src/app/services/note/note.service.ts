@@ -24,6 +24,7 @@ export class NoteService {
   async list() {
     const noteGroups = await this.firebaseService.list<INoteGroup>(
       this.collection,
+      "title",
     );
     return noteGroups.snapshot.docs.map((itemRef, index) => {
       const item = itemRef.data() as INoteGroup;

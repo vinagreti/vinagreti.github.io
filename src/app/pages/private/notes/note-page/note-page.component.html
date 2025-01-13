@@ -3,5 +3,5 @@
   [title]="note.title"
   [backTo]="['/notes', noteGroupId$ | async]"
 >
-  {{ note.content }}
+  <div [innerHTML]="note.content"></div>
 </app-page-wrapper>

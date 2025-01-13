@@ -16,14 +16,16 @@
     </div>
 
     <div>
-      <textarea
-        class="text-primary"
+      <div
+        #contentInput
+        contenteditable="true"
+        class="post-input"
         type="content"
         name="content"
         id="content"
         [(ngModel)]="content"
         placeholder="content"
-      ></textarea>
+      ></div>
     </div>
 
     <div class="flex gap-4">
