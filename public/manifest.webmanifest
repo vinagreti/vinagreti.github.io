@@ -56,5 +56,13 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "/share",
+    "params": {
+      "title": "title-value",
+      "text": "text-value",
+      "url": "/share"
+    }
+  }
 }

@@ -51,6 +51,36 @@
         </div>
       </div>
     </form>
+
+    <hr class="mt-4 mb-4" />
+
+    <form
+      class="flex flex-col gap-4"
+      (submit)="addNote()"
+      #noteAddForm="ngForm"
+    >
+      <div>
+        <input
+          class="text-primary"
+          type="title"
+          name="title"
+          id="title"
+          [(ngModel)]="newNoteModel.title"
+          placeholder="Título"
+          required
+        />
+      </div>
+      <div class="flex justify-end">
+        <button
+          [disabled]="
+            noteAddForm.invalid === true || (waitingCreation$ | async)
+          "
+        >
+          {{ (waitingCreation$ | async) ? "Criando..." : "Criar" }}
+        </button>
+      </div>
+    </form>
+
     <div class="flex flex-col gap-2 h-full overflow-auto">
       <a
         class="border py-1 px-3"
@@ -103,33 +133,5 @@
         </div>
       </a>
     </div>
-    <hr class="mt-4 mb-4" />
-
-    <form
-      class="flex flex-col gap-4"
-      (submit)="addNote()"
-      #noteAddForm="ngForm"
-    >
-      <div>
-        <input
-          class="text-primary"
-          type="title"
-          name="title"
-          id="title"
-          [(ngModel)]="newNoteModel.title"
-          placeholder="Título"
-          required
-        />
-      </div>
-      <div class="flex justify-end">
-        <button
-          [disabled]="
-            noteAddForm.invalid === true || (waitingCreation$ | async)
-          "
-        >
-          {{ (waitingCreation$ | async) ? "Criando..." : "Criar" }}
-        </button>
-      </div>
-    </form>
   </div>
 </app-page-wrapper>
