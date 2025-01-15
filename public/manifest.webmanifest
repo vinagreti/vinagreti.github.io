@@ -4,8 +4,8 @@
   "theme_color": "#161E27",
   "background_color": "#161E27",
   "display": "standalone",
-  "scope": "https://brunojoao.com",
-  "start_url": "https://brunojoao.com",
+  "scope": "/",
+  "start_url": "/",
   "icon": "icons/icon-72x72.png",
   "icons": [
     {
@@ -59,10 +59,12 @@
   ],
   "share_target": {
     "action": "/share",
+    "method": "POST",
+    "enctype": "application/x-www-form-urlencoded",
     "params": {
       "title": "title-value",
       "text": "text-value",
-      "url": "https://brunojoao.com"
+      "url": "url-bruno"
     }
   }
 }
