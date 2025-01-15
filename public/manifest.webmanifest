@@ -66,5 +66,17 @@
       "text": "text-value",
       "url": "url-bruno"
     }
+  },
+  "navigator": {
+    "share_target": {
+      "action": "/share",
+      "method": "POST",
+      "enctype": "application/x-www-form-urlencoded",
+      "params": {
+        "title": "title-value",
+        "text": "text-value",
+        "url": "url-bruno"
+      }
+    }
   }
 }
