@@ -60,22 +60,50 @@
   "share_target": {
     "action": "/share",
     "method": "POST",
-    "enctype": "application/x-www-form-urlencoded",
+    "enctype": "multipart/form-data",
     "params": {
-      "title": "title-value",
-      "text": "text-value",
-      "url": "url-bruno"
+      "title": "title-value-1",
+      "text": "text-value-1",
+      "url": "url-bruno-1",
+      "files": [
+        {
+          "name": "texts",
+          "accept": ["text/*"]
+        },
+        {
+          "name": "images",
+          "accept": ["image/*"]
+        },
+        {
+          "name": "audios",
+          "accept": ["audio/*"]
+        }
+      ]
     }
   },
   "navigator": {
     "share_target": {
       "action": "/share",
       "method": "POST",
-      "enctype": "application/x-www-form-urlencoded",
+      "enctype": "multipart/form-data",
       "params": {
-        "title": "title-value",
-        "text": "text-value",
-        "url": "url-bruno"
+        "title": "title-value-2",
+        "text": "text-value-2",
+        "url": "url-bruno-2",
+        "files": [
+          {
+            "name": "texts",
+            "accept": ["text/*"]
+          },
+          {
+            "name": "images",
+            "accept": ["image/*"]
+          },
+          {
+            "name": "audios",
+            "accept": ["audio/*"]
+          }
+        ]
       }
     }
   }
