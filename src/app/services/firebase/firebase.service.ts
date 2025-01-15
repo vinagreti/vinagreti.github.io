@@ -50,8 +50,12 @@ export class FirebaseService {
       ...any,
     ] = [
       collection,
-      orderBy(sortProperty as string, sortOrder),
     ];
+
+    if (sortProperty) {
+      params.push(orderBy(sortProperty as string, sortOrder));
+    }
+
     const snapshot = await getDocs(query(...params));
     const items = snapshot.docs.map((item) => item.data() as T);
     return { items, snapshot };
